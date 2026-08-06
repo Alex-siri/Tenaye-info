@@ -1,87 +1,66 @@
-# Local Services & Skilled Workers Marketplace (Offline-First)
+# 💊 Tenaye Info – Safe Medicine Knowledge for Every Ethiopian
 
-A web-based marketplace that connects customers with verified local skilled workers such as plumbers, electricians, tutors, carpenters, mechanics, and other service providers. The platform is designed with an **Offline-First** architecture to ensure users can continue accessing essential features even in areas with limited or unstable internet connectivity.
+Dawa Info is an AI-powered web application that helps users safely identify medicines and understand their purpose, side effects, warnings, and usage instructions in **Amharic, Afaan Oromo, and English**. By simply uploading a photo of a medicine package or searching by name, users receive clear, localized medicine information to support safer healthcare decisions.
 
 ---
 
 ## 📖 Overview
 
-Finding reliable local service providers can be difficult, especially in regions where digital platforms are limited and internet connectivity is unreliable. This project aims to bridge that gap by providing a trusted platform where customers can discover skilled workers, request services, and leave reviews, while enabling service providers to showcase their skills and receive job requests.
-
-The system is built as an **Offline-First Progressive Web Application (PWA)**, allowing users to browse previously loaded data and submit requests offline, with automatic synchronization once an internet connection becomes available.
+Millions of people purchase medicines without professional guidance and often lack access to understandable safety information. Dawa Info bridges this gap by using Artificial Intelligence, Optical Character Recognition (OCR), and trusted drug databases to provide medicine safety information in local languages. :contentReference[oaicite:1]{index=1}
 
 ---
 
-## 🎯 Objectives
+## ❗ Problem Statement
 
-- Connect customers with trusted local skilled workers.
-- Increase digital visibility for local professionals.
-- Improve trust through ratings and reviews.
-- Support low-connectivity environments using Offline-First architecture.
-- Provide a simple, mobile-friendly user experience.
+Many medicines are purchased without prescriptions or proper medical advice. As a result, people may misuse medications because they do not understand:
 
----
+- The purpose of the medicine
+- Proper dosage
+- Possible side effects
+- Drug interactions
+- When to stop using the medicine
 
-## ✨ Features
-
-### Customer
-
-- User Registration & Login
-- Browse available services
-- Search providers by category
-- View provider profiles
-- Submit booking requests
-- Rate and review completed services
-
-### Service Provider
-
-- Register as a provider
-- Create and manage professional profile
-- Add offered services
-- Manage booking requests
-- Update service information
-
-### Administrator
-
-- Manage users
-- Verify service providers
-- Manage service categories
-- Monitor platform activity
+Language barriers further limit access to reliable medicine information for many Ethiopian users. :contentReference[oaicite:2]{index=2}
 
 ---
 
-## 🌐 Offline-First Functionality
+## 💡 Our Solution
 
-The application is designed to continue functioning even when the internet connection is unavailable.
+Dawa Info allows users to:
 
-Offline capabilities include:
+- 📷 Upload a photo of a medicine package
+- 🔍 Search medicines by name
+- 🤖 Identify medicines using AI-powered OCR
+- 🌍 Read medicine information in:
+  - English
+  - Amharic
+  - Afaan Oromo
 
-- Cached application assets
-- Offline browsing of previously viewed providers
-- Cached service categories
-- Offline booking request queue
-- Automatic synchronization when internet connectivity returns
+The platform delivers clear explanations about each medicine, helping users make safer and more informed decisions. :contentReference[oaicite:3]{index=3}
 
 ---
 
-## 🏗️ System Architecture
+## ✨ Core Features
 
-```
-                User
-                  │
-                  ▼
-      Progressive Web App (PWA)
-                  │
-      ┌───────────┴───────────┐
-      │                       │
-Service Worker           IndexedDB
-      │                       │
-      └───────────┬───────────┘
-                  │
-          Django REST API
-                  │
-            PostgreSQL
-```
+- 📸 Drug Photo Upload
+- 🔤 Drug Name Search
+- 🤖 AI-based Medicine Identification
+- ⚠️ Side Effects & Safety Warnings
+- 💊 Medicine Purpose & Usage
+- 🔄 Drug Interaction Information
+- 🌐 Multilingual Support
+- 📱 Responsive Web Interface
+
+---
+
+## ⚙️ How It Works
+
+1. User uploads a medicine photo or enters its name.
+2. OCR extracts text from the medicine package.
+3. The medicine is matched against the OpenFDA database.
+4. AI retrieves medicine information.
+5. Information is translated into the user's selected language.
+6. The user receives a complete medicine safety profile.
 
 ---
 
@@ -89,70 +68,51 @@ Service Worker           IndexedDB
 
 ### Frontend
 
-- HTML5
-- CSS3
-- JavaScript
-- Progressive Web App (PWA)
+- React
 
 ### Backend
 
-- Python 3.12
-- Django
-- Django REST Framework
+- Python
+- FastAPI
 
-### Database
+### AI & OCR
 
-- PostgreSQL
+- Google Vision API *(or Tesseract OCR)*
 
-### Offline Technologies
+### Drug Database
 
-- Service Workers
-- IndexedDB
-- Cache API
+- OpenFDA API
 
-### Version Control
+### Translation
 
-- Git
-- GitHub
+- Google Translate API
 
 ---
 
-## 📂 Project Structure
+## 🌍 Supported Languages
 
-```
-local_services_marketplace/
-│
-├── core/
-├── users/
-├── services/
-├── bookings/
-├── reviews/
-│
-├── manage.py
-├── requirements.txt
-├── README.md
-├── .gitignore
-└── venv/
-```
+- 🇪🇹 Amharic
+- 🇪🇹 Afaan Oromo
+- 🇬🇧 English
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Installation
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/local_services_marketplace.git
-cd local_services_marketplace
-```
-
-### 2. Create a virtual environment
+### Clone the repository
 
 ```bash
-python3.12 -m venv venv
+git clone https://github.com/YOUR_USERNAME/dawa-info.git
+cd dawa-info
 ```
 
-### 3. Activate the virtual environment
+### Create a virtual environment
+
+```bash
+python -m venv venv
+```
+
+### Activate the environment
 
 Linux/macOS
 
@@ -166,88 +126,72 @@ Windows
 venv\Scripts\activate
 ```
 
-### 4. Install dependencies
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Configure PostgreSQL
-
-Update your database credentials inside:
-
-```
-core/settings.py
-```
-
-### 6. Apply migrations
+### Start the backend
 
 ```bash
-python manage.py migrate
+uvicorn main:app --reload
 ```
 
-### 7. Create an administrator
+### Start the frontend
 
 ```bash
-python manage.py createsuperuser
-```
-
-### 8. Start the development server
-
-```bash
-python manage.py runserver
-```
-
-Visit:
-
-```
-http://127.0.0.1:8000
+npm install
+npm run dev
 ```
 
 ---
 
-## 📌 Development Roadmap
+## 📁 Project Structure
 
-### Phase 1
-
-- Project setup
-- Authentication
-- Database design
-
-### Phase 2
-
-- User management
-- Service management
-- Provider profiles
-
-### Phase 3
-
-- Booking system
-- Ratings & Reviews
-
-### Phase 4
-
-- Offline-first implementation
-- Service Worker
-- IndexedDB
-- Background synchronization
-
-### Phase 5
-
-- Testing
-- Deployment
-- Documentation
+```
+dawa-info/
+│
+├── backend/
+│   ├── app/
+│   ├── api/
+│   ├── services/
+│   ├── models/
+│   └── main.py
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── components/
+│
+├── README.md
+├── requirements.txt
+└── package.json
+```
 
 ---
 
 ## 🎯 Future Improvements
 
-- In-app messaging
-- Online payments
-- GPS location services
-- Push notifications
-- AI-powered service recommendations
-- Mobile application
+- Offline support for low-bandwidth areas
+- Barcode scanning
+- Voice assistance in local languages
+- Medicine reminder system
+- Nearby pharmacy locator
+- Personalized medicine history
+- AI-powered medicine recommendations
+
+---
+
+## ⚠️ Disclaimer
+
+Dawa Info is designed to provide educational medicine information only. It is **not a substitute for professional medical advice**. Users should always consult a qualified healthcare provider or pharmacist before taking or changing any medication.
+
+---
+
+## 🌍 Vision
+
+Our vision is to make safe medicine knowledge accessible to every Ethiopian by providing reliable, understandable, and localized medicine information through AI-powered technology.
 
 ---
 
@@ -256,7 +200,7 @@ http://127.0.0.1:8000
 Contributions, suggestions, and improvements are welcome.
 
 1. Fork the repository
-2. Create a feature branch
+2. Create a new feature branch
 3. Commit your changes
 4. Push your branch
 5. Open a Pull Request
@@ -265,16 +209,12 @@ Contributions, suggestions, and improvements are welcome.
 
 ## 📄 License
 
-This project is developed for educational purposes at **Mekelle Institute of Technology (MIT)**.
+This project was developed for educational and hackathon purposes.
 
 ---
 
-## 👨‍💻 Author
+## 👨‍💻 Authors
 
-**Alex (Alula Muzey)**
+Developed by the **Dawa Info Team**
 
-IT Student | Full-Stack Developer
-
-GitHub: https://github.com/Alex-siri
-
----
+Safe Medicine Knowledge for Every Ethiopian.
