@@ -217,4 +217,4 @@ This project was developed for educational and hackathon purposes.
 
 Developed by the **Dawa Info Team**
 
-Safe Medicine Knowledge for Every Ethiopian.
+Safe Medicine Knowledge for Every Ethiopian.# Tenaye-info
