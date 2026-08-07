@@ -1,95 +1,163 @@
 # 💊 Tenaye Info – Safe Medicine Knowledge for Every Ethiopian
 
-Dawa Info is an AI-powered web application that helps users safely identify medicines and understand their purpose, side effects, warnings, and usage instructions in **Amharic, Afaan Oromo, and English**. By simply uploading a photo of a medicine package or searching by name, users receive clear, localized medicine information to support safer healthcare decisions.
+Tenaye Info is an AI-powered web application that helps users safely identify medicines and understand their purpose, side effects, warnings, dosage, and usage instructions in **Amharic, Afaan Oromo, and English**.
+
+Users can upload a medicine package image or search by medicine name to instantly receive localized and easy-to-understand medicine information. In addition, Tenaye Info offers personalized user profiles, pharmacy location services, and an AI chatbot to make healthcare information more accessible across Ethiopia.
 
 ---
 
-## 📖 Overview
+# 📖 Overview
 
-Millions of people purchase medicines without professional guidance and often lack access to understandable safety information. Dawa Info bridges this gap by using Artificial Intelligence, Optical Character Recognition (OCR), and trusted drug databases to provide medicine safety information in local languages. :contentReference[oaicite:1]{index=1}
+Millions of Ethiopians purchase medicines without professional guidance and often lack access to reliable information in their native language. Tenaye Info bridges this gap by combining Artificial Intelligence, OCR technology, trusted medicine databases, and location-based services to provide understandable medicine information and healthcare assistance.
 
 ---
 
-## ❗ Problem Statement
+# ❗ Problem Statement
 
 Many medicines are purchased without prescriptions or proper medical advice. As a result, people may misuse medications because they do not understand:
 
-- The purpose of the medicine
+- What the medicine is used for
 - Proper dosage
-- Possible side effects
+- Side effects
 - Drug interactions
-- When to stop using the medicine
+- Safety warnings
+- When to stop taking the medicine
 
-Language barriers further limit access to reliable medicine information for many Ethiopian users. :contentReference[oaicite:2]{index=2}
+Language barriers and limited access to healthcare information make the situation even worse for many Ethiopian communities.
 
 ---
 
-## 💡 Our Solution
+# 💡 Our Solution
 
-Dawa Info allows users to:
+Tenaye Info allows users to:
 
-- 📷 Upload a photo of a medicine package
+- 📷 Upload a medicine photo
 - 🔍 Search medicines by name
 - 🤖 Identify medicines using AI-powered OCR
+- 👤 Create and manage personal user profiles
+- 📍 Find nearby pharmacies using location services
+- 💬 Chat with an AI assistant for medicine-related guidance
 - 🌍 Read medicine information in:
   - English
   - Amharic
   - Afaan Oromo
 
-The platform delivers clear explanations about each medicine, helping users make safer and more informed decisions. :contentReference[oaicite:3]{index=3}
+The platform delivers clear and localized explanations to help users make safer healthcare decisions.
 
 ---
 
-## ✨ Core Features
+# ✨ Core Features
 
-- 📸 Drug Photo Upload
-- 🔤 Drug Name Search
+- 📸 Medicine Photo Upload
+- 🔤 Medicine Name Search
 - 🤖 AI-based Medicine Identification
-- ⚠️ Side Effects & Safety Warnings
 - 💊 Medicine Purpose & Usage
+- ⚠️ Side Effects & Safety Warnings
 - 🔄 Drug Interaction Information
 - 🌐 Multilingual Support
-- 📱 Responsive Web Interface
+- 👤 User Profile Management
+- 🏠 Store Personal Information (Name, Age, Gender, Address, etc.)
+- 📍 Nearby Pharmacy Finder
+- 💬 AI Health Chatbot
+- 📱 Fully Responsive Web Application
 
 ---
 
-## ⚙️ How It Works
+# 👤 User Profile
 
-1. User uploads a medicine photo or enters its name.
+Every registered user has a personalized profile where they can securely manage their personal information, including:
+
+- Full Name
+- Gender
+- Age
+- Phone Number
+- Email Address
+- Region
+- City
+- Home Address
+- Profile Picture
+
+The profile also allows users to save their preferences and improve their overall experience.
+
+---
+
+# 📍 Pharmacy Locator
+
+Using the device's location (with user permission), Tenaye Info helps users locate nearby pharmacies.
+
+Features include:
+
+- Find nearby pharmacies
+- View pharmacy locations on a map
+- Get directions
+- View contact information (where available)
+
+---
+
+# 💬 AI Chatbot
+
+Tenaye Info includes an AI-powered chatbot that helps users by:
+
+- Answering medicine-related questions
+- Explaining medicine usage
+- Providing safety reminders
+- Helping users navigate the application
+- Offering general health education
+
+> The chatbot provides educational information only and does not replace professional medical advice.
+
+---
+
+# ⚙️ How It Works
+
+1. User uploads a medicine image or enters its name.
 2. OCR extracts text from the medicine package.
-3. The medicine is matched against the OpenFDA database.
+3. The medicine is matched with trusted medicine databases.
 4. AI retrieves medicine information.
-5. Information is translated into the user's selected language.
-6. The user receives a complete medicine safety profile.
+5. Information is translated into the selected language.
+6. Users can ask additional questions through the chatbot.
+7. Users can locate nearby pharmacies if professional assistance is needed.
 
 ---
 
-## 🛠️ Technology Stack
+# 🛠️ Technology Stack
 
-### Frontend
+## Frontend
 
-- React
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- Tailwind CSS
 
-### Backend
+## Backend
 
-- Python
-- FastAPI
+- Node.js
+- Express.js
 
-### AI & OCR
+## Database
+
+- MongoDB
+
+## AI & OCR
 
 - Google Vision API *(or Tesseract OCR)*
 
-### Drug Database
+## Drug Database
 
 - OpenFDA API
 
-### Translation
+## Maps & Location
+
+- Geolocation API
+- Google Maps API *(or OpenStreetMap)*
+
+## Translation
 
 - Google Translate API
 
 ---
 
-## 🌍 Supported Languages
+# 🌍 Supported Languages
 
 - 🇪🇹 Amharic
 - 🇪🇹 Afaan Oromo
@@ -97,107 +165,133 @@ The platform delivers clear explanations about each medicine, helping users make
 
 ---
 
-## 🚀 Installation
+# 🚀 Installation
 
-### Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/dawa-info.git
-cd dawa-info
-```
-
-### Create a virtual environment
+## Clone the repository
 
 ```bash
-python -m venv venv
+git clone https://github.com/YOUR_USERNAME/tenaye-info.git
+
+cd tenaye-info
 ```
 
-### Activate the environment
-
-Linux/macOS
+## Install Backend Dependencies
 
 ```bash
-source venv/bin/activate
-```
-
-Windows
-
-```cmd
-venv\Scripts\activate
-```
-
-### Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Start the backend
-
-```bash
-uvicorn main:app --reload
-```
-
-### Start the frontend
-
-```bash
+cd backend
 npm install
+```
+
+## Install Frontend Dependencies
+
+```bash
+cd frontend
+npm install
+```
+
+## Configure Environment Variables
+
+Create a `.env` file inside the backend folder.
+
+Example:
+
+```env
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection
+
+OPENFDA_API_KEY=your_api_key
+
+GOOGLE_MAPS_API_KEY=your_api_key
+
+GOOGLE_VISION_API_KEY=your_api_key
+
+GOOGLE_TRANSLATE_API_KEY=your_api_key
+```
+
+## Start Backend
+
+```bash
+npm run dev
+```
+
+## Start Frontend
+
+```bash
 npm run dev
 ```
 
 ---
 
-## 📁 Project Structure
+# 📁 Project Structure
 
 ```
-dawa-info/
-│
+tenaye-info/
+
 ├── backend/
-│   ├── app/
-│   ├── api/
-│   ├── services/
+│   ├── controllers/
 │   ├── models/
-│   └── main.py
+│   ├── routes/
+│   ├── middleware/
+│   ├── services/
+│   ├── config/
+│   ├── server.js
+│   └── package.json
 │
 ├── frontend/
-│   ├── src/
 │   ├── public/
-│   └── components/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── layouts/
+│   │   ├── services/
+│   │   ├── hooks/
+│   │   └── App.js
+│   └── package.json
 │
 ├── README.md
-├── requirements.txt
+├── .env.example
 └── package.json
 ```
 
 ---
 
-## 🎯 Future Improvements
+# 🎯 Future Improvements
 
-- Offline support for low-bandwidth areas
+- Offline support for low-bandwidth communities
 - Barcode scanning
 - Voice assistance in local languages
 - Medicine reminder system
-- Nearby pharmacy locator
-- Personalized medicine history
-- AI-powered medicine recommendations
+- Digital prescription storage
+- Emergency health information
+- Hospital and clinic locator
+- Pharmacy ratings and reviews
+- Medicine availability checker
+- AI-powered health recommendations
+- Medicine history and favorites
 
 ---
 
-## ⚠️ Disclaimer
+# ⚠️ Disclaimer
 
-Dawa Info is designed to provide educational medicine information only. It is **not a substitute for professional medical advice**. Users should always consult a qualified healthcare provider or pharmacist before taking or changing any medication.
+Tenaye Info provides educational medicine information only.
 
----
+It is **not a substitute for professional medical advice, diagnosis, or treatment.**
 
-## 🌍 Vision
-
-Our vision is to make safe medicine knowledge accessible to every Ethiopian by providing reliable, understandable, and localized medicine information through AI-powered technology.
+Always consult a qualified healthcare provider or pharmacist before taking, stopping, or changing any medication.
 
 ---
 
-## 🤝 Contributing
+# 🌍 Vision
 
-Contributions, suggestions, and improvements are welcome.
+Our vision is to make safe medicine knowledge accessible to every Ethiopian through AI-powered technology, multilingual support, personalized healthcare services, and easy access to nearby pharmacies.
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
 
 1. Fork the repository
 2. Create a new feature branch
@@ -207,14 +301,14 @@ Contributions, suggestions, and improvements are welcome.
 
 ---
 
-## 📄 License
+# 📄 License
 
-This project was developed for educational and hackathon purposes.
+This project was developed for educational, research, and hackathon purposes.
 
 ---
 
-## 👨‍💻 Authors
+# 👨‍💻 Authors
 
-Developed by the **Dawa Info Team**
+Developed by the **Tenaye Info Team**
 
-Safe Medicine Knowledge for Every Ethiopian.# Tenaye-info
+**Safe Medicine Knowledge for Every Ethiopian**
