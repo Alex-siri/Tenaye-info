@@ -258,8 +258,6 @@ tenaye-info/
 ---
 
 # 🎯 Future Improvements
-
-- Offline support for low-bandwidth communities
 - Barcode scanning
 - Voice assistance in local languages
 - Medicine reminder system
