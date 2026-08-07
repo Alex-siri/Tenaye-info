@@ -8,7 +8,7 @@ Users can upload a medicine package image or search by medicine name to instantl
 
 # 📖 Overview
 
-Millions of Ethiopians purchase medicines without professional guidance and often lack access to reliable information in their native language. Tenaye Info bridges this gap by combining Artificial Intelligence, OCR technology, trusted medicine databases, and location-based services to provide understandable medicine information and healthcare assistance.
+Millions of Ethiopians(over 60%) purchase medicines without professional guidance and often lack access to reliable information in their native language. Tenaye Info bridges this gap by combining Artificial Intelligence, OCR technology, trusted medicine databases, and location-based services to provide understandable medicine information and healthcare assistance.
 
 ---
 
@@ -303,7 +303,7 @@ Contributions are welcome.
 
 # 📄 License
 
-This project was developed for educational, research, and hackathon purposes.
+This project was developed for educational, research, and purposes.
 
 ---
 
