@@ -1,6 +1,6 @@
 # 💊 Tenaye Info – Safe Medicine Knowledge for Every Ethiopian
 
-Tenaye Info is an AI-powered web application that helps users safely identify medicines and understand their purpose, side effects, warnings, dosage, and usage instructions in **Amharic, Afaan Oromo, and English**.
+Tenaye Info is an AI-powered web application that helps users safely identify medicines and understand their purpose, side effects, warnings, dosage, and usage instructions in **English and Amharic**.
 
 Users can upload a medicine package image or search by medicine name to instantly receive localized and easy-to-understand medicine information. In addition, Tenaye Info offers personalized user profiles, pharmacy location services, and an AI chatbot to make healthcare information more accessible across Ethiopia.
 
@@ -40,7 +40,6 @@ Tenaye Info allows users to:
 - 🌍 Read medicine information in:
   - English
   - Amharic
-  - Afaan Oromo
 
 The platform delivers clear and localized explanations to help users make safer healthcare decisions.
 
@@ -65,7 +64,7 @@ The platform delivers clear and localized explanations to help users make safer 
 
 # 👤 User Profile
 
-Every registered user has a personalized profile where they can securely manage their personal information, including:
+While registering an account is entirely **optional** to use most features of the site, registered users get a personalized profile where they can securely manage their personal information, including:
 
 - Full Name
 - Gender
@@ -95,6 +94,8 @@ Features include:
 ---
 
 # 💬 AI Chatbot
+
+*(Note: To encourage registration, all users will see inviting options like "Talk with Tenaye AI". However, clicking these will redirect unregistered users to create an account, as the AI Chatbot is an exclusive feature for logged-in users.)*
 
 Tenaye Info includes an AI-powered chatbot that helps users by:
 
@@ -142,6 +143,10 @@ Tenaye Info includes an AI-powered chatbot that helps users by:
 
 - Google Vision API *(or Tesseract OCR)*
 
+## Chatbot
+
+- Gemini API
+
 ## Drug Database
 
 - OpenFDA API
@@ -160,12 +165,17 @@ Tenaye Info includes an AI-powered chatbot that helps users by:
 # 🌍 Supported Languages
 
 - 🇪🇹 Amharic
-- 🇪🇹 Afaan Oromo
 - 🇬🇧 English
 
 ---
 
 # 🚀 Installation
+
+## Requirements
+
+- Node.js 20.19.0 or newer
+- npm
+- MongoDB when database-backed features are enabled
 
 ## Clone the repository
 
@@ -182,12 +192,9 @@ cd backend
 npm install
 ```
 
-## Install Frontend Dependencies
+## Frontend
 
-```bash
-cd frontend
-npm install
-```
+The frontend is a static HTML/CSS/JavaScript app under `frontend/`, so it does not need a separate package install.
 
 ## Configure Environment Variables
 
@@ -207,17 +214,22 @@ GOOGLE_MAPS_API_KEY=your_api_key
 GOOGLE_VISION_API_KEY=your_api_key
 
 GOOGLE_TRANSLATE_API_KEY=your_api_key
+
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-## Start Backend
+## Start App
 
 ```bash
 npm run dev
 ```
 
-## Start Frontend
+The backend serves the frontend from `frontend/index.html`.
+
+You can also start only the backend from the backend folder:
 
 ```bash
+cd backend
 npm run dev
 ```
 
@@ -227,32 +239,135 @@ npm run dev
 
 ```
 tenaye-info/
-
+│
 ├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── middleware/
-│   ├── services/
-│   ├── config/
-│   ├── server.js
-│   └── package.json
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── db.js
+│   │   │   ├── cloudinary.js
+│   │   │   ├── googleVision.js
+│   │   │   └── gemini.js
+│   │   │
+│   │   ├── models/
+│   │   │   ├── User.js
+│   │   │   ├── Medicine.js
+│   │   │   ├── ChatHistory.js
+│   │   │   └── Pharmacy.js
+│   │   │
+│   │   ├── controllers/
+│   │   │   ├── authController.js
+│   │   │   ├── userController.js
+│   │   │   ├── medicineController.js
+│   │   │   ├── ocrController.js
+│   │   │   ├── chatbotController.js
+│   │   │   └── pharmacyController.js
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── authRoutes.js
+│   │   │   ├── userRoutes.js
+│   │   │   ├── medicineRoutes.js
+│   │   │   ├── ocrRoutes.js
+│   │   │   ├── chatbotRoutes.js
+│   │   │   └── pharmacyRoutes.js
+│   │   │
+│   │   ├── services/
+│   │   │   ├── ocrService.js
+│   │   │   ├── translationService.js
+│   │   │   ├── drugLookupService.js
+│   │   │   ├── chatbotService.js
+│   │   │   └── pharmacyService.js
+│   │   │
+│   │   ├── middleware/
+│   │   │   ├── authMiddleware.js
+│   │   │   ├── errorHandler.js
+│   │   │   ├── rateLimiter.js
+│   │   │   └── validateRequest.js
+│   │   │
+│   │   ├── utils/
+│   │   │   ├── logger.js
+│   │   │   ├── apiResponse.js
+│   │   │   └── constants.js
+│   │   │
+│   │   ├── app.js
+│   │   └── server.js
+│   │
+│   ├── tests/
+│   ├── .env
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── package.json
+│   └── README.md
 │
 ├── frontend/
 │   ├── public/
+│   │   ├── locales/
+│   │   │   ├── en/translation.json
+│   │   │   └── am/translation.json
+│   │   └── assets/
+│   │       ├── images/
+│   │       └── icons/
+│   │
+│   ├── pages/                         # one .html file per page (MPA)
+│   │   ├── index.html                 # Home
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   ├── profile.html
+│   │   ├── medicine-search.html
+│   │   ├── medicine-details.html
+│   │   ├── chatbot.html
+│   │   ├── pharmacy-locator.html
+│   │   └── 404.html
+│   │
 │   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── layouts/
-│   │   ├── services/
-│   │   ├── hooks/
-│   │   └── App.js
-│   └── package.json
+│   │   ├── css/
+│   │   │   ├── input.css              # Tailwind directives + custom classes
+│   │   │   └── output.css             # generated by Tailwind build (gitignored)
+│   │   │
+│   │   ├── js/
+│   │   │   ├── components/            # reusable DOM-render functions
+│   │   │   │   ├── navbar.js
+│   │   │   │   ├── footer.js
+│   │   │   │   ├── languageSwitcher.js
+│   │   │   │   ├── medicineCard.js
+│   │   │   │   ├── chatBubble.js
+│   │   │   │   └── pharmacyListItem.js
+│   │   │   │
+│   │   │   ├── pages/                 # page-specific logic, one per HTML page
+│   │   │   │   ├── home.js
+│   │   │   │   ├── login.js
+│   │   │   │   ├── register.js
+│   │   │   │   ├── profile.js
+│   │   │   │   ├── medicineSearch.js
+│   │   │   │   ├── medicineDetails.js
+│   │   │   │   ├── chatbot.js
+│   │   │   │   └── pharmacyLocator.js
+│   │   │   │
+│   │   │   ├── services/              # API call wrappers (fetch)
+│   │   │   │   ├── api.js
+│   │   │   │   ├── authService.js
+│   │   │   │   ├── medicineService.js
+│   │   │   │   ├── chatbotService.js
+│   │   │   │   └── pharmacyService.js
+│   │   │   │
+│   │   │   ├── utils/
+│   │   │   │   ├── auth.js            # token storage, isLoggedIn(), logout()
+│   │   │   │   ├── geolocation.js
+│   │   │   │   ├── domHelpers.js
+│   │   │   │   └── validators.js
+│   │   │   │
+│   │   │   ├── i18n.js                # i18next config (vanilla)
+│   │   │   └── main.js                # shared init (navbar, auth check, i18n)
+│   │
+│   ├── .env
+│   ├── .gitignore
+│   ├── package.json
+│   ├── tailwind.config.js
+│   ├── vite.config.js
+│   └── README.md
 │
-├── README.md
-├── .env.example
-└── package.json
+├── docs/
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -264,7 +379,6 @@ tenaye-info/
 - Digital prescription storage
 - Emergency health information
 - Hospital and clinic locator
-- Pharmacy ratings and reviews
 - Medicine availability checker
 - AI-powered health recommendations
 - Medicine history and favorites
