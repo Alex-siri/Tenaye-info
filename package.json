@@ -1,0 +1,13 @@
+{
+  "name": "tenaye-info",
+  "version": "1.0.0",
+  "description": "Safe Medicine Knowledge for Every Ethiopian",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "start": "npm --prefix backend start",
+    "dev": "npm --prefix backend run dev"
+  },
+  "keywords": [],
+  "author": "Tenaye Info Team",
+  "license": "ISC"
+}
