@@ -44,5 +44,17 @@
     "dosage": "Dosage Info",
     "warnings": "Side Effects & Warnings",
     "noResults": "No medicine found."
+  },
+  "profile": {
+    "title": "My Profile",
+    "fullName": "Full Name",
+    "email": "Email",
+    "gender": "Gender",
+    "age": "Age",
+    "phoneNumber": "Phone Number",
+    "region": "Region",
+    "city": "City",
+    "homeAddress": "Home Address",
+    "save": "Save Changes"
   }
 }

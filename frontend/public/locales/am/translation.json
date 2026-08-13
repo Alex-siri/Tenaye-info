@@ -44,5 +44,17 @@
     "dosage": "የአወሳሰድ መመሪያ",
     "warnings": "የጎንዮሽ ጉዳቶች እና ማስጠንቀቂያዎች",
     "noResults": "ምንም መድኃኒት አልተገኘም።"
+  },
+  "profile": {
+    "title": "የእኔ መገለጫ",
+    "fullName": "ሙሉ ስም",
+    "email": "ኢሜይል",
+    "gender": "ጾታ",
+    "age": "እድሜ",
+    "phoneNumber": "ስልክ ቁጥር",
+    "region": "ክልል",
+    "city": "ከተማ",
+    "homeAddress": "የቤት አድራሻ",
+    "save": "ለውጦችን አስቀምጥ"
   }
 }
