@@ -1,0 +1,29 @@
+{
+    "nav": {
+        "home": "Home",
+        "search": "Search Medicine",
+        "profile": "Profile",
+        "chatbot": "Chat with Tenaye AI",
+        "pharmacy": "Find Pharmacy",
+        "login": "Login",
+        "register": "Register",
+        "logout": "Logout"
+    },
+    "profile": {
+        "title": "My Profile",
+        "fullName": "Full Name",
+        "email": "Email",
+        "gender": "Gender",
+        "age": "Age",
+        "phoneNumber": "Phone Number",
+        "region": "Region",
+        "city": "City",
+        "homeAddress": "Home Address",
+        "save": "Save Changes"
+    },
+    "search": {
+        "placeholder": "Search medicine by name...",
+        "button": "Search",
+        "noResults": "No medicines found."
+    }
+}

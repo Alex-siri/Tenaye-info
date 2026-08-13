@@ -1,0 +1,29 @@
+{
+    "nav": {
+        "home": "መነሻ",
+        "search": "መድሃኒት ፈልግ",
+        "profile": "መገለጫ",
+        "chatbot": "ከጤናዬ AI ጋር ይወያዩ",
+        "pharmacy": "ፋርማሲ ፈልግ",
+        "login": "ግባ",
+        "register": "ተመዝገብ",
+        "logout": "ውጣ"
+    },
+    "profile": {
+        "title": "የእኔ መገለጫ",
+        "fullName": "ሙሉ ስም",
+        "email": "ኢሜይል",
+        "gender": "ጾታ",
+        "age": "እድሜ",
+        "phoneNumber": "ስልክ ቁጥር",
+        "region": "ክልል",
+        "city": "ከተማ",
+        "homeAddress": "የቤት አድራሻ",
+        "save": "ለውጦችን አስቀምጥ"
+    },
+    "search": {
+        "placeholder": "በስም መድሃኒት ፈልግ...",
+        "button": "ፈልግ",
+        "noResults": "ምንም መድሃኒት አልተገኘም።"
+    }
+}

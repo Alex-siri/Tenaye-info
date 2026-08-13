@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tenaye Info</title>
+    <script src="https://cdn.jsdelivr.net/npm/i18next@23/i18next.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@4/i18nextHttpBackend.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+
+    <nav class="flex items-center justify-between p-4 bg-white shadow">
+        <span class="font-bold text-lg">💊 Tenaye Info</span>
+        <div id="lang-switcher-container"></div>
+    </nav>
+
+    <main class="p-8 max-w-xl mx-auto">
+        <h1 data-i18n="nav.home" class="text-2xl font-semibold mb-4"></h1>
+        <p data-i18n="search.placeholder" class="text-gray-600"></p>
+    </main>
+
+    <script src="../src/js/i18n.js"></script>
+    <script src="../src/js/components/languageSwitcher.js"></script>
+    <script>
+        initI18n(() => {
+            const container = document.getElementById('lang-switcher-container');
+            container.appendChild(renderLanguageSwitcher());
+        });
+    </script>
+</body>
+
+</html>
