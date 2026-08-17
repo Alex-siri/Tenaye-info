@@ -1,29 +1,60 @@
 {
-    "nav": {
-        "home": "Home",
-        "search": "Search Medicine",
-        "profile": "Profile",
-        "chatbot": "Chat with Tenaye AI",
-        "pharmacy": "Find Pharmacy",
-        "login": "Login",
-        "register": "Register",
-        "logout": "Logout"
-    },
-    "profile": {
-        "title": "My Profile",
-        "fullName": "Full Name",
-        "email": "Email",
-        "gender": "Gender",
-        "age": "Age",
-        "phoneNumber": "Phone Number",
-        "region": "Region",
-        "city": "City",
-        "homeAddress": "Home Address",
-        "save": "Save Changes"
-    },
-    "search": {
-        "placeholder": "Search medicine by name...",
-        "button": "Search",
-        "noResults": "No medicines found."
-    }
+  "nav": {
+    "home": "Home",
+    "search": "Medicine Search",
+    "pharmacy": "Pharmacy Locator",
+    "chatbot": "Tenaye AI Chatbot",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "footer": {
+    "tagline": "Safe Medicine Knowledge & Healthcare Assistance for Every Ethiopian in Amharic & English.",
+    "quickLinks": "Quick Links",
+    "disclaimerTitle": "Medical Disclaimer",
+    "disclaimerText": "Tenaye Info provides educational medicine information only. It is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider or pharmacist before taking, stopping, or changing any medication."
+  },
+  "home": {
+    "title": "Safe Medicine Knowledge for Every Ethiopian",
+    "subtitle": "Search medications, upload packages, locate nearby pharmacies, and chat with AI in Amharic & English.",
+    "searchBtn": "Search Medicine",
+    "uploadBtn": "Upload Package Photo",
+    "pharmacyBtn": "Find Nearby Pharmacy",
+    "aiBtn": "Talk with Tenaye AI"
+  },
+  "pharmacy": {
+    "title": "Nearby Pharmacy Locator",
+    "subtitle": "Find licensed pharmacies near your location across Ethiopia.",
+    "useLocationBtn": "📍 Use My Current Location",
+    "locationDenied": "Location permission was denied. Showing major pharmacies in Addis Ababa.",
+    "searchPlaceholder": "Search by pharmacy name or city...",
+    "distance": "km away",
+    "directions": "Get Directions",
+    "phone": "Phone",
+    "hours": "Hours",
+    "open247": "Open 24/7",
+    "noResults": "No pharmacies found matching your location or search."
+  },
+  "search": {
+    "title": "Search Medicines",
+    "placeholder": "Enter medicine name (e.g. Paracetamol, Amoxicillin)...",
+    "searchBtn": "Search",
+    "purpose": "Purpose & Uses",
+    "dosage": "Dosage Info",
+    "warnings": "Side Effects & Warnings",
+    "noResults": "No medicine found."
+  },
+  "profile": {
+    "title": "My Profile",
+    "fullName": "Full Name",
+    "email": "Email",
+    "gender": "Gender",
+    "age": "Age",
+    "phoneNumber": "Phone Number",
+    "region": "Region",
+    "city": "City",
+    "homeAddress": "Home Address",
+    "save": "Save Changes"
+  }
 }
