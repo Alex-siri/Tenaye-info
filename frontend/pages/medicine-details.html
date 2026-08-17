@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Photo Search - Tenaye Info</title>
+ <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+ <nav class="flex items-center justify-between p-4 bg-white shadow">
+ <span class="font-bold text-lg">Tenaye Info</span>
+ <a href="medicine-search.html" class="text-sm text-blue-600">Search by Name</a>
+ </nav>
+ <main class="max-w-lg mx-auto p-4">
+ <h1 class="text-xl font-semibold mb-4">Upload Medicine Photo</h1>
+ <form id="upload-form" class="mb-4">
+ <input type="file" id="image-input" accept="image/*" required class="mb-3 block" />
+ <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Identify</button>
+ </form>
+ <div id="results"></div>
+ </main>
+ <script src="../src/js/utils/auth.js"></script>
+ <script src="../src/js/services/api.js"></script>
+ <script src="../src/js/services/medicineService.js"></script>
+ <script src="../src/js/components/medicineCard.js"></script>
+ <script src="../src/js/pages/medicineDetails.js"></script>
+</body>
+</html>
