@@ -22,7 +22,6 @@ app.use('/api/medicines', medicineRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/chatbot', chatbotRoutes);
 const ocrRoutes = require("./routes/ocrRoutes");
-// near the other app.use() lines:
 app.use("/api/ocr", ocrRoutes);
 
 app.get('/api/protected-test', protect, (req, res) => {

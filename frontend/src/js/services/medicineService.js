@@ -7,7 +7,7 @@ async function identifyMedicineFromImage(imageFile) {
   const token = getToken();
   const formData = new FormData();
   formData.append("image", imageFile);
-  const response = await fetch("http://localhost:5000/api/ocr/identify", {
+  const response = await fetch(`${API_BASE_URL}/ocr/identify`, {
     method: "POST",
     headers: token ? { Authorization: `Bearer ${token}` } : {},
     body: formData,

@@ -16,6 +16,9 @@ form.addEventListener("submit", async (e) => {
       resultsDiv.appendChild(renderMedicineCard(med));
     });
   } catch (error) {
-    resultsDiv.innerHTML = `<p class="text-red-600">${error.message}</p>`;
+    const p = document.createElement("p");
+    p.className = "text-red-600";
+    p.textContent = error.message;
+    resultsDiv.replaceChildren(p);
   }
 });

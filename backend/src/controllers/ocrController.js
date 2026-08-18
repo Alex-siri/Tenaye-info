@@ -1,4 +1,3 @@
-const cloudinary = require("../config/cloudinary");
 const { extractTextFromImage } = require("../services/ocrService");
 const { lookupByExtractedText } = require("../services/drugLookupService");
 const identifyMedicine = async (req, res) => {
@@ -6,7 +5,7 @@ const identifyMedicine = async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: "An image file is required" });
     }
-    const extractedText = await extratTextFromImage(req.file.buffer);
+    const extractedText = await extractTextFromImage(req.file.buffer);
     if (!extractedText) {
       return res.status(200).json({
         matches: [],
