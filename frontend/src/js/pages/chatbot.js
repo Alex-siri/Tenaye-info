@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
         chatWindow.appendChild(renderChatBubble('assistant', data.reply));
     } catch (error) {
         typingBubble.remove();
-        chatWindow.appendChild(renderChatBubble('assistant', Error: ${error.message}));
+        chatWindow.appendChild(renderChatBubble('assistant', `Error: ${error.message}`));
     }
 
     chatWindow.scrollTop = chatWindow.scrollHeight;

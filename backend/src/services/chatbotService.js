@@ -20,7 +20,7 @@ const buildContext = (medicines) => {
     return medicines
         .map(
             (m) =>
-                Medicine: ${m.name.en}\nPurpose: ${m.purpose?.en || 'N/A'}\nDosage: ${m.dosage?.en || 'N/A'}\nSide Effects: ${m.sideEffects?.en || 'N/A'}\nWarnings: ${m.warnings?.en || 'N/A'}
+                `Medicine: ${m.name.en}\nPurpose: ${m.purpose?.en || 'N/A'}\nDosage: ${m.dosage?.en || 'N/A'}\nSide Effects: ${m.sideEffects?.en || 'N/A'}\nWarnings: ${m.warnings?.en || 'N/A'}`
         )
         .join('\n\n');
 };
