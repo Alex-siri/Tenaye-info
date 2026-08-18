@@ -44,6 +44,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/medicines', medicineRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+const ocrRoutes = require("./routes/ocrRoutes");
+app.use("/api/ocr", ocrRoutes);
 
 // Root route serves frontend/pages/index.html per README
 app.get('/', (req, res) => {
