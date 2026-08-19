@@ -10,7 +10,7 @@ function renderFooter() {
         <div>
           <div class="flex items-center space-x-2 font-bold text-xl text-white mb-3">
             <span>💊</span>
-            <span>Tenaye <span class="text-emerald-400">Info</span></span>
+            <span>Tenaye <span class="text-gold-500">Info</span></span>
           </div>
           <p class="text-sm text-slate-400 leading-relaxed" data-i18n="footer.tagline">
             Safe Medicine Knowledge & Healthcare Assistance for Every Ethiopian in Amharic & English.
@@ -21,10 +21,10 @@ function renderFooter() {
         <div>
           <h3 class="text-white font-semibold text-base mb-3" data-i18n="footer.quickLinks">Quick Links</h3>
           <ul class="space-y-2 text-sm">
-            <li><a href="/pages/index.html" data-i18n="nav.home" class="hover:text-emerald-400 transition-colors">Home</a></li>
-            <li><a href="/pages/medicine-search.html" data-i18n="nav.search" class="hover:text-emerald-400 transition-colors">Medicine Search</a></li>
-            <li><a href="/pages/pharmacy-locator.html" data-i18n="nav.pharmacy" class="hover:text-emerald-400 transition-colors">Pharmacy Locator</a></li>
-            <li><a href="/pages/chatbot.html" data-i18n="nav.chatbot" class="hover:text-emerald-400 transition-colors">Tenaye AI Chatbot</a></li>
+            <li><a href="/pages/index.html" data-i18n="nav.home" class="hover:text-gold-500 transition-colors">Home</a></li>
+            <li><a href="/pages/medicine-search.html" data-i18n="nav.search" class="hover:text-gold-500 transition-colors">Medicine Search</a></li>
+            <li><a href="/pages/pharmacy-locator.html" data-i18n="nav.pharmacy" class="hover:text-gold-500 transition-colors">Pharmacy Locator</a></li>
+            
           </ul>
         </div>
 

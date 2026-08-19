@@ -1,28 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Search Medicine - Tenaye Info</title>
- <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Search Medicine - Tenaye Info</title>
+  <script src="https://unpkg.com/i18next@23.7.11/dist/umd/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-http-backend@2.4.2/i18nextHttpBackend.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Modern Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Space Grotesk", "sans-serif"],
+          },
+          colors: {
+            navy: {
+              50: '#f0f4f8',
+              100: '#d9e2ec',
+              800: '#1e3a8a',
+              900: '#172554',
+              950: '#0B132B',
+            },
+            gold: {
+              400: '#FBBF24',
+              500: '#D4AF37',
+              600: '#B45309',
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-gray-50 text-gray-900">
- <nav class="flex items-center justify-between p-4 bg-white shadow">
- <span class="font-bold text-lg">Tenaye Info</span>
- <a href="medicine-details.html" class="text-sm text-blue-600">Search by Photo</a>
- </nav>
- <main class="max-w-lg mx-auto p-4">
- <h1 class="text-xl font-semibold mb-4">Search Medicine</h1>
- <form id="search-form" class="flex gap-2 mb-4">
- <input type="text" id="search-input" aria-label="Medicine name" placeholder="e.g. Paracetamol" required class="flex-1 border rounded px-3 py-2" />
- <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Search</button>
- </form>
- <div id="results"></div>
- </main>
- <script src="../src/js/utils/auth.js"></script>
- <script src="../src/js/services/api.js"></script>
- <script src="../src/js/services/medicineService.js"></script>
- <script src="../src/js/components/medicineCard.js"></script>
- <script src="../src/js/pages/medicineSearch.js"></script>
+
+<body
+  class="bg-navy-50 font-sans selection:bg-gold-400 selection:text-navy-900 text-navy-900 min-h-screen flex flex-col">
+  <div id="navbar-container"></div>
+
+  <main class="flex-1 w-full max-w-3xl mx-auto px-4 py-12 flex flex-col items-center">
+
+    <!-- Hero Section -->
+    <div class="text-center mb-10">
+      <div
+        class="inline-block bg-navy-900 text-gold-400 px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-4 shadow-sm">
+        💊 <span data-i18n="search.infoBadge">Tenaye Info</span>
+      </div>
+      <h2 class="text-navy-800 text-xs font-bold tracking-[0.2em] uppercase mb-4" data-i18n="search.subtitle">Medicine
+        Safety for Ethiopia</h2>
+      <h1 class="text-4xl md:text-5xl font-bold text-navy-900 mb-6 tracking-tight">
+        <span data-i18n="search.titleMain">Know what you're taking.</span>
+        <span class="text-gold-500" data-i18n="search.titleHighlight">Stay safe.</span>
+      </h1>
+      <p class="text-navy-800 text-lg max-w-xl mx-auto mb-6" data-i18n="search.description">Upload a medicine photo or
+        search
+        by name to get safety information in your language — before it's too late.</p>
+    </div>
+
+    <!-- Upload Box -->
+    <div class="w-full max-w-2xl bg-white rounded-2xl shadow-sm p-6 mb-8 border border-navy-100">
+      <h3
+        class="text-xs font-bold text-navy-800 uppercase tracking-widest text-center mb-4 flex items-center justify-center gap-2"
+        data-i18n="search.uploadTitle">
+        📷 UPLOAD MEDICINE PHOTO
+      </h3>
+
+      <!-- The main drop zone triggers the camera by default -->
+      <div id="drop-zone" class="cursor-pointer block">
+        <div
+          class="border-2 border-dashed border-navy-200 rounded-xl p-8 text-center hover:border-gold-400 hover:bg-navy-50 transition-all group">
+          <div
+            class="w-12 h-12 bg-navy-100 text-navy-900 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-gold-400 group-hover:text-white transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+            </svg>
+          </div>
+          <h4 class="text-lg font-semibold text-navy-900 mb-2" data-i18n="search.tapToUpload">Tap to take a photo</h4>
+          <p class="text-navy-800 text-sm">
+            <span data-i18n="search.aiRead">Snap the medicine label — AI will read it</span> ·
+            <label for="gallery-input" id="browse-files-btn"
+              class="text-gold-600 font-semibold cursor-pointer hover:underline relative z-10"
+              data-i18n="search.browseFiles">Browse files</label>
+          </p>
+        </div>
+      </div>
+      <!-- Camera Input (capture="environment" forces camera on mobile) -->
+      <input type="file" id="camera-input" accept="image/*" capture="environment" class="hidden" />
+      <!-- Gallery Input (standard file selector) -->
+      <input type="file" id="gallery-input" accept="image/*" class="hidden" />
+    </div>
+
+    <!-- Divider -->
+    <div class="w-full max-w-2xl flex items-center gap-4 mb-8">
+      <div class="h-px bg-navy-200 flex-1"></div>
+      <span class="text-navy-800 text-sm font-medium" data-i18n="search.orSearch">or search by name</span>
+      <div class="h-px bg-navy-200 flex-1"></div>
+    </div>
+
+    <!-- Search Form -->
+    <div class="w-full max-w-2xl mb-12">
+      <form id="search-form" class="flex flex-col md:flex-row gap-3">
+        <input type="text" id="search-input" placeholder="e.g. Amoxicillin, Paracetamol, Metformin..." required
+          class="flex-1 border-2 border-navy-100 rounded-xl px-4 py-4 focus:outline-none focus:border-gold-400 text-lg shadow-sm" />
+        <button type="submit"
+          class="bg-navy-900 text-gold-400 font-bold px-8 py-4 rounded-xl hover:bg-navy-950 transition-colors shadow-sm flex items-center justify-center gap-2 text-lg">
+          <span data-i18n="search.button">Search</span> <span>→</span>
+        </button>
+      </form>
+      <div class="flex flex-wrap items-center gap-2 mt-4">
+        <span class="text-sm text-navy-800 font-medium mr-2" data-i18n="search.try">Try:</span>
+        <button type="button"
+          class="suggestion-btn px-3 py-1 bg-white border border-navy-200 rounded-full text-sm hover:bg-navy-50 hover:border-gold-400 transition-colors">Amoxicillin</button>
+        <button type="button"
+          class="suggestion-btn px-3 py-1 bg-white border border-navy-200 rounded-full text-sm hover:bg-navy-50 hover:border-gold-400 transition-colors">Paracetamol</button>
+        <button type="button"
+          class="suggestion-btn px-3 py-1 bg-white border border-navy-200 rounded-full text-sm hover:bg-navy-50 hover:border-gold-400 transition-colors">Ibuprofen</button>
+      </div>
+
+      <!-- Secondary Inline Language Toggles -->
+      <div class="flex justify-center gap-3 mt-8 border-t border-navy-100 pt-8" id="search-lang-toggles">
+        <span class="text-sm text-navy-800 font-medium flex items-center mr-2">Results Language:</span>
+        <button type="button"
+          class="lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors border shadow-sm"
+          data-lang="en">English</button>
+        <button type="button"
+          class="lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors border shadow-sm"
+          data-lang="am">አማርኛ</button>
+      </div>
+    </div>
+
+    <!-- Results Container -->
+    <div id="results" class="w-full max-w-2xl"></div>
+
+  </main>
+
+  <div id="footer-container"></div>
+
+  <script src="../src/js/utils/auth.js"></script>
+  <script src="../src/js/i18n.js"></script>
+  <script src="../src/js/components/navbar.js"></script>
+  <script src="../src/js/components/footer.js"></script>
+  <script src="../src/js/components/languageSwitcher.js"></script>
+  <script src="../src/js/services/api.js"></script>
+  <script src="../src/js/services/chatbotService.js"></script>
+  <script src="../src/js/components/chatBubble.js"></script>
+  <script src="../src/js/components/chatWidget.js"></script>
+  <script src="../src/js/services/medicineService.js"></script>
+  <script src="../src/js/components/medicineCard.js"></script>
+  <script src="../src/js/pages/medicineSearch.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navContainer = document.getElementById('navbar-container');
+      if (navContainer && typeof renderNavbar === 'function') {
+        navContainer.appendChild(renderNavbar());
+      }
+      const footerContainer = document.getElementById('footer-container');
+      if (footerContainer && typeof renderFooter === 'function') {
+        footerContainer.appendChild(renderFooter());
+      }
+      if (typeof renderChatWidget === 'function') {
+        document.body.appendChild(renderChatWidget());
+        initChatWidget();
+      }
+    });
+  </script>
 </body>
+
 </html>

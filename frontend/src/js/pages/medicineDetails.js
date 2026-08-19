@@ -9,16 +9,20 @@ form.addEventListener("submit", async (e) => {
   try {
     const data = await identifyMedicineFromImage(file);
     resultsDiv.innerHTML = "";
-    if (!data.matches || data.matches.length === 0) {
+    if (!data.drug) {
       const p = document.createElement("p");
       p.className = "text-gray-500";
-      p.textContent = `No match found. Detected text: "${data.extractedText || "none"}"`;
+      p.textContent = `No match found. Detected text: "${data.ocr?.raw_text || "none"}"`;
       resultsDiv.replaceChildren(p);
       return;
     }
-    data.matches.forEach((med) => {
-      resultsDiv.appendChild(renderMedicineCard(med));
-    });
+    
+    const infoText = document.createElement("p");
+    infoText.className = "text-green-600 mb-4 font-semibold text-sm";
+    infoText.textContent = `Detected via OCR: "${data.ocr.detected_name}"`;
+    resultsDiv.appendChild(infoText);
+
+    resultsDiv.appendChild(renderMedicineCard(data.drug));
   } catch (error) {
     const p = document.createElement("p");
     p.className = "text-red-600";

@@ -9,6 +9,12 @@
     "register": "Register",
     "logout": "Logout"
   },
+  "auth": {
+    "confirmLogout": "Confirm Logout",
+    "logoutPrompt": "Are you sure you want to log out of your account?",
+    "cancel": "Cancel",
+    "logout": "Log Out"
+  },
   "footer": {
     "tagline": "Safe Medicine Knowledge & Healthcare Assistance for Every Ethiopian in Amharic & English.",
     "quickLinks": "Quick Links",
@@ -21,7 +27,16 @@
     "searchBtn": "Search Medicine",
     "uploadBtn": "Upload Package Photo",
     "pharmacyBtn": "Find Nearby Pharmacy",
-    "aiBtn": "Talk with Tenaye AI"
+    "aiBtn": "Talk with Tenaye AI",
+    "card1Title": "Medicine Search & OCR",
+    "card1Desc": "Search medications by name or upload a photo of package labels for instant AI identification, dosage instructions, and warnings.",
+    "card1Link": "Explore Search \u2192",
+    "card2Title": "Pharmacy Locator",
+    "card2Desc": "Locate nearby licensed pharmacies using interactive map view, calculate real distances, and get instant turn-by-turn directions.",
+    "card2Link": "Find Pharmacies \u2192",
+    "card3Title": "Tenaye AI Health Assistant",
+    "card3Desc": "Ask medicine questions in English or Amharic and get grounded, accurate health reminders from our AI chatbot assistant.",
+    "card3Link": "Chat Now \u2192"
   },
   "pharmacy": {
     "title": "Nearby Pharmacy Locator",
@@ -43,7 +58,19 @@
     "purpose": "Purpose & Uses",
     "dosage": "Dosage Info",
     "warnings": "Side Effects & Warnings",
-    "noResults": "No medicine found."
+    "noResults": "No medicine found.",
+    "infoBadge": "INFO",
+    "subtitle": "Medicine Safety for Ethiopia",
+    "titleMain": "Know what you're taking.",
+    "titleHighlight": "Stay safe.",
+    "description": "Upload a medicine photo or search by name to get safety information in your language — before it's too late.",
+    "uploadTitle": "UPLOAD MEDICINE PHOTO",
+    "tapToUpload": "Tap to take or upload a photo",
+    "aiRead": "Snap the medicine label — AI will read it",
+    "browseFiles": "Browse files",
+    "orSearch": "or search by name",
+    "button": "Search",
+    "try": "Try:"
   },
   "profile": {
     "title": "My Profile",

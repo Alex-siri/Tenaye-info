@@ -27,6 +27,8 @@ function applyTranslations() {
     const key = el.getAttribute('data-i18n-placeholder');
     el.placeholder = i18next.t(key);
   });
+  // Expose the current language globally to CSS for dynamic content toggling
+  document.body.setAttribute('data-lang', i18next.language);
 }
 
 function changeLanguage(lng) {
@@ -35,3 +37,10 @@ function changeLanguage(lng) {
     applyTranslations();
   });
 }
+
+// Automatically initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof initI18n === 'function') {
+        initI18n();
+    }
+});

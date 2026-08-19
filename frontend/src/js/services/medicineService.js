@@ -6,13 +6,13 @@ async function searchMedicine(name) {
 async function identifyMedicineFromImage(imageFile) {
   const token = getToken();
   const formData = new FormData();
-  formData.append("image", imageFile);
+  formData.append("file", imageFile);
   const response = await fetch(`${API_BASE_URL}/ocr/identify`, {
     method: "POST",
     headers: token ? { Authorization: `Bearer ${token}` } : {},
     body: formData,
   });
   const data = await response.json();
-  if (!response.ok) throw new Error(data.message || "OCR request failed");
+  if (!response.ok) throw new Error(data.detail || data.message || "OCR request failed");
   return data;
 }

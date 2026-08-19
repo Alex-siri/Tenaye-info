@@ -8,8 +8,8 @@ function renderLanguageSwitcher() {
   container.innerHTML = `
     <select id="language-select" 
             class="bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold py-1.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer transition-all">
-      <option value="en" ${currentLang === 'en' ? 'selected' : ''}>🌐 EN (English)</option>
-      <option value="am" ${currentLang === 'am' ? 'selected' : ''}>🌐 አማ (አማርኛ)</option>
+      <option value="en" ${currentLang === 'en' ? 'selected' : ''}>🇬🇧 EN (English)</option>
+      <option value="am" ${currentLang === 'am' ? 'selected' : ''}>🇪🇹 አማ (አማርኛ)</option>
     </select>
   `;
 

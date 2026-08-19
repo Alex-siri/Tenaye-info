@@ -2,45 +2,160 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - Tenaye Info</title>
-    <script src="https://cdn.jsdelivr.net/npm/i18next@23/i18next.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@4/i18nextHttpBackend.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Tenaye Info</title>
+  <script src="https://cdn.jsdelivr.net/npm/i18next@23/i18next.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/i18next-http-backend@4/i18nextHttpBackend.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Modern Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Space Grotesk", "sans-serif"],
+          },
+          colors: {
+            navy: {
+              50: '#f0f4f8',
+              100: '#d9e2ec',
+              800: '#1e3a8a',
+              900: '#172554',
+              950: '#0B132B',
+            },
+            gold: {
+              400: '#FBBF24',
+              500: '#D4AF37',
+              600: '#B45309',
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body class="bg-gray-50 text-gray-900 min-h-screen flex items-center justify-center">
+<body
+  class="bg-navy-50 font-sans selection:bg-gold-400 selection:text-navy-900 text-navy-900 min-h-screen flex items-center justify-center">
 
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
-        <h1 class="text-2xl font-semibold mb-6 text-center">💊 Tenaye Info</h1>
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
+    <h1 class="text-2xl font-semibold mb-6 text-center">💊 Tenaye Info</h1>
 
-        <form id="login-form" class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium mb-1">Email</label>
-                <input type="email" id="email" required class="w-full border rounded px-3 py-2" />
-            </div>
-            <div>
-                <label class="block text-sm font-medium mb-1">Password</label>
-                <input type="password" id="password" required class="w-full border rounded px-3 py-2" />
-            </div>
+    <form id="login-form" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Email</label>
+        <input type="email" id="email" required class="w-full border rounded px-3 py-2" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1">Password</label>
+        <input type="password" id="password" required class="w-full border rounded px-3 py-2" />
+      </div>
 
-            <p id="error-message" class="text-red-600 text-sm hidden"></p>
+      <div class="flex justify-end">
+        <button type="button" id="btn-show-forgot-password"
+          class="text-sm text-navy-800 hover:text-gold-600 transition-colors">Forgot Password?</button>
+      </div>
 
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-                Login
-            </button>
+      <p id="error-message" class="text-red-600 text-sm hidden"></p>
+
+      <button type="submit"
+        class="w-full bg-navy-900 text-gold-400 font-bold py-2 rounded hover:bg-navy-950 transition-colors">
+        Login
+      </button>
+    </form>
+
+    <p class="text-sm text-center mt-4">
+      Don't have an account? <a href="register.html"
+        class="text-gold-600 font-semibold hover:text-gold-500">Register</a>
+    </p>
+  </div>
+
+  <!-- Forgot Password Modal -->
+  <div id="forgot-password-modal"
+    class="fixed inset-0 bg-navy-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl transform scale-100 transition-transform relative">
+      <button type="button" id="btn-close-forgot-password"
+        class="absolute top-4 right-4 text-slate-400 hover:text-navy-900 transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Step 1: Request OTP -->
+      <div id="forgot-step-1">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-bold text-navy-900 mb-2">Reset Password</h2>
+          <p class="text-sm text-navy-600">Enter your email address to receive a verification code.</p>
+        </div>
+        <form id="forgot-form" class="space-y-4">
+          <div>
+            <input type="email" id="forgot-email" required placeholder="name@example.com"
+              class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 outline-none" />
+          </div>
+          <p id="forgot-error-message" class="text-red-600 text-sm hidden text-center"></p>
+          <button type="submit"
+            class="w-full bg-navy-900 text-gold-400 font-bold py-3 rounded-lg hover:bg-navy-800 transition-colors">
+            Send Code
+          </button>
         </form>
+      </div>
 
-        <p class="text-sm text-center mt-4">
-            Don't have an account? <a href="register.html" class="text-blue-600">Register</a>
-        </p>
+      <!-- Step 2: Verify OTP Only -->
+      <div id="forgot-step-2" class="hidden">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-bold text-navy-900 mb-2">Enter OTP</h2>
+          <p class="text-sm text-navy-600" id="reset-email-display">Code sent to your email.</p>
+          <p class="text-xs text-red-500 font-semibold mt-2">(For testing: check terminal for OTP!)</p>
+        </div>
+        <form id="verify-otp-form" class="space-y-4">
+          <div>
+            <input type="text" id="reset-otp" maxlength="6" required placeholder="000000"
+              class="w-full text-center text-3xl tracking-[0.5em] font-bold border-b-2 border-slate-200 px-3 py-2 focus:border-gold-400 outline-none" />
+          </div>
+          <button type="submit"
+            class="w-full bg-navy-900 text-gold-400 font-bold py-3 rounded-lg hover:bg-navy-800 transition-colors">
+            Verify Code
+          </button>
+        </form>
+      </div>
+
+      <!-- Step 3: New Password -->
+      <div id="forgot-step-3" class="hidden">
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-bold text-navy-900 mb-2">Create New Password</h2>
+          <p class="text-sm text-navy-600">Please enter your new password twice to confirm.</p>
+        </div>
+        <form id="reset-form" class="space-y-4">
+          <div>
+            <input type="password" id="reset-new-password" required minlength="6" placeholder="New Password"
+              class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 outline-none" />
+          </div>
+          <div>
+            <input type="password" id="reset-confirm-password" required minlength="6" placeholder="Confirm New Password"
+              class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 outline-none" />
+          </div>
+          <p id="reset-error-message" class="text-red-600 text-sm hidden text-center"></p>
+          <button type="submit"
+            class="w-full bg-navy-900 text-gold-400 font-bold py-3 rounded-lg hover:bg-navy-800 transition-colors">
+            Save New Password
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <script src="../src/js/utils/auth.js"></script>
-    <script src="../src/js/services/api.js"></script>
-    <script src="../src/js/services/authService.js"></script>
-    <script src="../src/js/pages/login.js"></script>
+  <script src="../src/js/i18n.js"></script>
+  <script src="../src/js/components/languageSwitcher.js"></script>
+  <script src="../src/js/utils/auth.js"></script>
+  <script src="../src/js/services/api.js"></script>
+  <script src="../src/js/services/authService.js"></script>
+  <script src="../src/js/pages/login.js"></script>
 </body>
 
 </html>
