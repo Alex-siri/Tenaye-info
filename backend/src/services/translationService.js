@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const translateToAmharic = async (text) => {
+const translateToAmharic = async (text, retries = 2) => {
     if (!text || text === 'Information not provided' || text === 'N/A') return '';
     try {
         const response = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=am&dt=t", {
@@ -11,7 +11,10 @@ const translateToAmharic = async (text) => {
             body: new URLSearchParams({ q: text }).toString()
         });
         
-        if (!response.ok) return text;
+        if (!response.ok) {
+            if (retries > 0) return await translateToAmharic(text, retries - 1);
+            return text;
+        }
         
         const data = await response.json();
         // Google Translate returns a nested array where data[0] contains the sentences
@@ -20,6 +23,7 @@ const translateToAmharic = async (text) => {
         }
         return text;
     } catch (error) {
+        if (retries > 0) return await translateToAmharic(text, retries - 1);
         console.error("Translation error:", error);
         return text;
     }

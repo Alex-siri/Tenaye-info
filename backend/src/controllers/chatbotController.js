@@ -13,15 +13,26 @@ const sendMessage = async (req, res) => {
         const assistantMessageCount = await ChatHistory.countDocuments({ userId: req.userId, role: 'assistant' });
         const isFirstMessage = assistantMessageCount === 0;
 
-        await ChatHistory.create({ userId: req.userId, role: 'user', message });
+        const userMsg = new ChatHistory({ userId: req.userId, role: 'user', message });
+        await userMsg.save();
 
         const reply = await askChatbot(message, isFirstMessage);
 
-        await ChatHistory.create({ userId: req.userId, role: 'assistant', message: reply });
+        const aiMsg = new ChatHistory({ userId: req.userId, role: 'assistant', message: reply });
+        await aiMsg.save();
 
         res.status(200).json({ reply });
     } catch (error) {
-        res.status(500).json({ message: 'Chatbot request failed', error: error.message });
+        console.error("Chatbot Error:", error);
+        let errorMsg = 'Chatbot request failed';
+        
+        if (error.message.includes('404')) {
+             errorMsg = 'API Key or Model Error: The Gemini API key may be invalid or the requested model is not available for this key. Please double check your key in Google AI Studio.';
+        } else {
+             errorMsg = error.message;
+        }
+
+        res.status(500).json({ message: 'Chatbot request failed', error: errorMsg });
     }
 };
 

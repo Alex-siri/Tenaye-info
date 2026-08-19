@@ -1,7 +1,6 @@
 // Express Application Setup
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 
 // Person B's required routes
 const authRoutes = require('./routes/authRoutes');
@@ -9,8 +8,7 @@ const medicineRoutes = require('./routes/medicineRoutes');
 const userRoutes = require('./routes/userRoutes');
 const chatbotRoutes = require('./routes/chatbotRoutes');
 const protect = require('./middleware/authMiddleware');
-
-dotenv.config();
+const ocrRoutes = require("./routes/ocrRoutes");
 
 const app = express();
 
@@ -30,12 +28,12 @@ const pharmacyRoutes = require('./routes/pharmacyRoutes');
 
 // Health Check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok' });
+  res.json({ status: 'ok' });
 });
 
 // Protected Test Route (Person B)
 app.get('/api/protected-test', protect, (req, res) => {
-    res.json({ message: 'You are authenticated', userId: req.userId });
+  res.json({ message: 'You are authenticated', userId: req.userId });
 });
 
 // Mount API Routes (Combined)
@@ -44,7 +42,6 @@ app.use('/api/auth', authRoutes);
 app.use('/api/medicines', medicineRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/chatbot', chatbotRoutes);
-const ocrRoutes = require("./routes/ocrRoutes");
 app.use("/api/ocr", ocrRoutes);
 
 // Root route serves frontend/pages/index.html per README

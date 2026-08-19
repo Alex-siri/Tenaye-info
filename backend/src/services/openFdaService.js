@@ -26,13 +26,11 @@ async function fetchDrugFromOpenFDA(query) {
         const dosageEn = (result.dosage_and_administration && result.dosage_and_administration[0]) || 'Information not provided';
         const warningsEn = (result.warnings && result.warnings[0]) || (result.boxed_warning && result.boxed_warning[0]) || 'Information not provided';
 
-        // Translate to Amharic concurrently to save time
-        const [nameAm, purposeAm, dosageAm, warningsAm] = await Promise.all([
-            translateToAmharic(nameEn),
-            translateToAmharic(purposeEn),
-            translateToAmharic(dosageEn),
-            translateToAmharic(warningsEn)
-        ]);
+        // Translate to Amharic sequentially to avoid triggering Google Translate rate-limiting
+        const nameAm = await translateToAmharic(nameEn);
+        const purposeAm = await translateToAmharic(purposeEn);
+        const dosageAm = await translateToAmharic(dosageEn);
+        const warningsAm = await translateToAmharic(warningsEn);
         
         // Map the massive OpenFDA JSON structure into our clean Medicine Schema format
         return {
