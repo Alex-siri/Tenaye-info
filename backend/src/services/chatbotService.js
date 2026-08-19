@@ -31,7 +31,7 @@ const askChatbot = async (question, isFirstMessage) => {
 
     const prompt = `You are Tenaye AI, a medicine information assistant for Ethiopian users. You provide educational information only and always remind users to consult a doctor or pharmacist for medical decisions. Never invent dosages or facts not in the provided context.
 
-    ${isFirstMessage ? "Since this is the first interaction, please briefly introduce yourself and what you do before answering." : "Do NOT introduce yourself, greet the user, or repeat the disclaimer. Get straight to the answer."}
+    ${isFirstMessage ? "Since this is the first interaction, you MUST introduce yourself by explicitly saying 'Hello! I am Tenaye AI, your medicine information assistant.' before addressing the user's question." : "Do NOT introduce yourself, greet the user, or repeat the disclaimer. Get straight to the answer."}
 
 Relevant medicine data:
 ${context}
@@ -41,7 +41,17 @@ User question: ${question}
 Answer clearly and briefly, in a friendly and helpful tone.`;
 
     const result = await geminiModel.generateContent(prompt);
-    return result.response.text();
+    let responseText = result.response.text();
+
+    if (isFirstMessage) {
+        // Guarantee introduction
+        const intro = "Hello! I am Tenaye AI, your medicine information assistant.";
+        if (!responseText.includes("Tenaye AI")) {
+            responseText = `${intro} ${responseText}`;
+        }
+    }
+
+    return responseText;
 };
 
 module.exports = { askChatbot };

@@ -1,12 +1,16 @@
-const visionClient = require("../config/googleVision");
+const Tesseract = require('tesseract.js');
+
 const extractTextFromImage = async (imageBuffer) => {
-  const [result] = await visionClient.textDetection({
-    image: { content: imageBuffer },
-  });
-  const detections = result.textAnnotations;
-  if (!detections || detections.length === 0) {
-    return "";
-  }
-  return detections[0].description;
+    try {
+        const { data: { text } } = await Tesseract.recognize(imageBuffer, 'eng');
+        if (!text || text.trim().length === 0) {
+            return "";
+        }
+        return text;
+    } catch (error) {
+        console.error("OCR extraction failed:", error);
+        return "";
+    }
 };
+
 module.exports = { extractTextFromImage };

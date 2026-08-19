@@ -1,7 +1,14 @@
 const express = require("express");
 const multer = require("multer");
 const { identifyMedicine } = require("../controllers/ocrController");
-const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 }, fileFilter: (req, file, cb) => cb(null, file.mimetype?.startsWith("image/")) });
+// We use a larger multer limit (12MB) so our controller can cleanly catch the 10MB 
+// limit and return the exact Python-style JSON error message.
+const upload = multer({ 
+  storage: multer.memoryStorage(), 
+  limits: { fileSize: 12 * 1024 * 1024 } 
+});
 const router = express.Router();
-router.post("/identify", upload.single("image"), identifyMedicine);
+
+// Changed from 'image' to 'file' to match the Python `file: UploadFile = File(...)` signature.
+router.post("/identify", upload.single("file"), identifyMedicine);
 module.exports = router;

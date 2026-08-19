@@ -9,9 +9,13 @@ const sendMessage = async (req, res) => {
             return res.status(400).json({ message: 'A message is required' });
         }
 
+        // Check if the AI has ever successfully replied to this user
+        const assistantMessageCount = await ChatHistory.countDocuments({ userId: req.userId, role: 'assistant' });
+        const isFirstMessage = assistantMessageCount === 0;
+
         await ChatHistory.create({ userId: req.userId, role: 'user', message });
 
-        const reply = await askChatbot(message);
+        const reply = await askChatbot(message, isFirstMessage);
 
         await ChatHistory.create({ userId: req.userId, role: 'assistant', message: reply });
 
