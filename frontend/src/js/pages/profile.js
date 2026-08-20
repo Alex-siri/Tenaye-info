@@ -5,7 +5,6 @@ if (!isLoggedIn()) {
 const form = document.getElementById('profile-form');
 const statusMessage = document.getElementById('status-message');
 
-document.getElementById('logout-btn').addEventListener('click', logout);
 
 async function loadProfile() {
     try {
@@ -27,6 +26,7 @@ form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const updates = {
+        fullName: document.getElementById('fullName').value.trim(),
         gender: document.getElementById('gender').value,
         age: document.getElementById('age').value ? Number(document.getElementById('age').value) : undefined,
         region: document.getElementById('region').value,
