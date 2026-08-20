@@ -19,13 +19,17 @@ const identifyMedicine = async (req, res) => {
     }
 
     const extractedText = await extractTextFromImage(req.file.buffer);
-    const drug_name = extractedText ? extractedText.split('\n')[0].trim() : null;
-
-    if (!drug_name) {
+    
+    // Clean up the text by removing non-alphanumeric characters for validation
+    const cleanText = extractedText ? extractedText.replace(/[^a-zA-Z0-9\s]/g, '').trim() : '';
+    
+    if (!cleanText || cleanText.length < 3) {
       return res.status(422).json({
-        detail: "Could not identify a drug name from the image. Try a clearer photo or search by name.",
+        detail: "Could not identify a clear drug name from the image. Please try a clearer photo or search by name instead.",
       });
     }
+
+    const drug_name = extractedText.split('\n')[0].trim();
 
     const matches = await lookupByExtractedText(extractedText);
     const drug = matches.length > 0 ? matches[0] : null;
