@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Photo Search - Tenaye Info</title>
- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💊</text></svg>">
- <script src="https://unpkg.com/i18next@23.7.11/dist/umd/i18next.min.js"></script>
- <script src="https://unpkg.com/i18next-http-backend@2.4.2/i18nextHttpBackend.min.js"></script>
- <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Search - Tenaye Info</title>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💊</text></svg>">
+  <script src="https://unpkg.com/i18next@23.7.11/dist/umd/i18next.min.js"></script>
+  <script src="https://unpkg.com/i18next-http-backend@2.4.2/i18nextHttpBackend.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Modern Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -39,36 +42,38 @@
     }
   </script>
 </head>
+
 <body class="bg-navy-50 font-sans selection:bg-gold-400 selection:text-navy-900 text-navy-900">
- <nav class="flex items-center justify-between p-4 bg-white shadow">
- <span class="font-bold text-lg">Tenaye Info</span>
- <a href="medicine-search.html" class="text-sm text-gold-600 font-semibold hover:text-gold-500">Search by Name</a>
- </nav>
- <main class="max-w-lg mx-auto p-4">
- <h1 class="text-xl font-semibold mb-4">Upload Medicine Photo</h1>
- <form id="upload-form" class="mb-4">
- <input type="file" id="image-input" aria-label="Medicine photo" accept="image/*" required class="mb-3 block" />
- <button type="submit" class="bg-navy-900 text-gold-400 font-bold px-4 py-2 rounded">Identify</button>
- </form>
- <div id="results"></div>
- </main>
- <script src="../src/js/i18n.js"></script>
- <script src="../src/js/components/languageSwitcher.js"></script>
- <script src="../src/js/utils/auth.js"></script>
- <script src="../src/js/services/api.js"></script>
- <script src="../src/js/services/medicineService.js"></script>
- <script src="../src/js/components/medicineCard.js"></script>
- <script src="../src/js/pages/medicineDetails.js"></script>
- <script src="../src/js/services/chatbotService.js"></script>
- <script src="../src/js/components/chatBubble.js"></script>
- <script src="../src/js/components/chatWidget.js"></script>
- <script>
+  <nav class="flex items-center justify-between p-4 bg-white shadow">
+    <span class="font-bold text-lg">Tenaye Info</span>
+    <a href="medicine-search.html" class="text-sm text-gold-600 font-semibold hover:text-gold-500">Search by Name</a>
+  </nav>
+  <main class="max-w-lg mx-auto p-4">
+    <h1 class="text-xl font-semibold mb-4">📷 Upload Medicine Photo</h1>
+    <form id="upload-form" class="mb-4">
+      <input type="file" id="image-input" aria-label="Medicine photo" accept="image/*" required class="mb-3 block" />
+      <button type="submit" class="bg-navy-900 text-gold-400 font-bold px-4 py-2 rounded">Identify</button>
+    </form>
+    <div id="results"></div>
+  </main>
+  <script src="../src/js/i18n.js"></script>
+  <script src="../src/js/components/languageSwitcher.js"></script>
+  <script src="../src/js/utils/auth.js"></script>
+  <script src="../src/js/services/api.js"></script>
+  <script src="../src/js/services/medicineService.js"></script>
+  <script src="../src/js/components/medicineCard.js"></script>
+  <script src="../src/js/pages/medicineDetails.js"></script>
+  <script src="../src/js/services/chatbotService.js"></script>
+  <script src="../src/js/components/chatBubble.js"></script>
+  <script src="../src/js/components/chatWidget.js"></script>
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
       if (typeof renderChatWidget === 'function') {
         document.body.appendChild(renderChatWidget());
         initChatWidget();
       }
     });
- </script>
+  </script>
 </body>
+
 </html>
