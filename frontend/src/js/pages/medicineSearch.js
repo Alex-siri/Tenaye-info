@@ -58,7 +58,15 @@ async function handleFileUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
 
-    resultsDiv.innerHTML = '<div class="text-center p-8"><p class="text-navy-800 font-medium animate-pulse">Analyzing image using AI...</p></div>';
+    const imgUrl = URL.createObjectURL(file);
+    resultsDiv.innerHTML = `
+      <div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm mb-6">
+        <img src="${imgUrl}" class="max-h-64 mx-auto rounded-lg shadow-sm mb-4 object-contain border border-slate-100" />
+        <p class="text-navy-800 font-medium animate-pulse flex items-center justify-center gap-2">
+          <svg class="animate-spin h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+          Analyzing image using AI...
+        </p>
+      </div>`;
     
     try {
         const data = await identifyMedicineFromImage(file);
@@ -76,7 +84,13 @@ async function handleFileUpload(e) {
 
         resultsDiv.appendChild(renderMedicineCard(data.drug));
     } catch (error) {
-        showError(error.message);
+        if (error.message.includes('Failed to fetch')) {
+            showError("Network Error: Could not connect to the server. The image might be too large or the AI service is busy.");
+        } else if (error.message.includes('not found in the database')) {
+            resultsDiv.innerHTML = `<div class="text-center p-8 bg-gold-50 rounded-xl border border-gold-200 shadow-sm"><p class="text-gold-700 font-medium">⚠️ ${error.message}</p></div>`;
+        } else {
+            showError(error.message);
+        }
     }
     
     // Reset file inputs so same file can be uploaded again if needed
