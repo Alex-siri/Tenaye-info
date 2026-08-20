@@ -4,8 +4,8 @@ function renderNavbar() {
 
   const getLinkClasses = (path) => {
     const isActive = currentPath.includes(path);
-    return isActive 
-      ? 'text-gold-400 font-bold border-b-2 border-gold-400 pb-1' 
+    return isActive
+      ? 'text-gold-400 font-bold border-b-2 border-gold-400 pb-1'
       : 'text-white font-medium hover:text-gold-200 transition-colors';
   };
 
@@ -24,7 +24,7 @@ function renderNavbar() {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
-          <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-105" onclick="window.location.href='/pages/index.html'">
+          <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-105">
             <span class="text-2xl drop-shadow-sm">💊</span>
             <span class="font-bold text-xl tracking-tight text-white">Tenaye <span class="text-gold-400 font-extrabold">Info</span></span>
           </div>
@@ -129,7 +129,7 @@ function renderNavbar() {
   if (desktopLogoutBtn && typeof logout === 'function') {
     desktopLogoutBtn.addEventListener('click', () => logout());
   }
-  
+
   const mobileLogoutBtn = header.querySelector('#mobile-logout-btn');
   if (mobileLogoutBtn && typeof logout === 'function') {
     mobileLogoutBtn.addEventListener('click', () => logout());
@@ -157,7 +157,7 @@ function renderNavbar() {
         dropdownMenu.classList.add('hidden');
       }
     });
-    
+
     // Try to populate username from local storage if available
     try {
       const userStr = localStorage.getItem('user');
@@ -170,7 +170,7 @@ function renderNavbar() {
           nameEl.textContent = user.email.split('@')[0];
         }
       }
-    } catch(e) {}
+    } catch (e) { }
   }
 
   return header;
