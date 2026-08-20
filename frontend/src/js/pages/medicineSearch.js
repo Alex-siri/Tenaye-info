@@ -138,8 +138,8 @@ if (langPills.length > 0) {
         const currentDataLang = document.body.getAttribute('data-lang') || localStorage.getItem('language') || 'en';
         langPills.forEach(pill => {
             if (pill.dataset.lang === currentDataLang) {
-                // Active state (Green like mockup)
-                pill.className = "lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm bg-emerald-600 text-white border-transparent";
+                // Active state (Gold)
+                pill.className = "lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm bg-gold-500 text-navy-950 border-transparent";
             } else {
                 // Inactive state (White with border)
                 pill.className = "lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors border shadow-sm bg-white text-gray-700 hover:bg-gray-50 border-gray-200";
