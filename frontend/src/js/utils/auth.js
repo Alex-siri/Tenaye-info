@@ -61,7 +61,7 @@ function logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       sessionStorage.removeItem('chatWidgetHistory');
-      window.location.href = '/pages/login.html';
+      window.location.href = '/';
     });
   }
 
