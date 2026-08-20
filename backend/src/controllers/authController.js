@@ -67,15 +67,25 @@ const register = async (req, res) => {
       homeAddress,
       otp,
       otpExpires: new Date(Date.now() + 10 * 60000), // Expires in 10 mins
-      isVerified: false
+      isVerified: true
     });
     
     await newUser.save();
 
+    const token = generateToken(newUser._id);
+
     res.status(201).json({
-      message: 'Registration successful! Please verify your email.',
-      requiresVerification: true,
-      email: newUser.email,
+      message: 'Registration successful!',
+      token,
+      user: {
+        id: newUser._id,
+        fullName: newUser.fullName,
+        email: newUser.email,
+        gender: newUser.gender,
+        age: newUser.age,
+        phoneNumber: newUser.phoneNumber,
+        homeAddress: newUser.homeAddress,
+      },
     });
   } catch (error) {
     res.status(500).json({ message: 'Registration failed', error: error.message });
@@ -146,9 +156,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    if (!user.isVerified) {
-      return res.status(403).json({ message: 'Please verify your email address before logging in.', requiresVerification: true, email: user.email });
-    }
+    // Email verification check bypassed per user request
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
