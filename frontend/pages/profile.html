@@ -12,8 +12,7 @@
   <!-- Modern Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -41,61 +40,134 @@
   </script>
 </head>
 
-<body class="bg-navy-50 font-sans selection:bg-gold-400 selection:text-navy-900 text-navy-900">
+<body class="bg-navy-50 font-sans selection:bg-gold-400 selection:text-navy-900 text-navy-900 min-h-screen flex flex-col relative">
 
-  <nav class="flex items-center justify-between p-4 bg-white shadow">
-    <span class="font-bold text-lg">💊 Tenaye Info</span>
-    <button id="logout-btn" class="text-sm text-red-600">Logout</button>
-  </nav>
+  <!-- Background decorative blobs -->
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-navy-800/10 blur-[80px]"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-gold-400/10 blur-[80px]"></div>
+  </div>
 
-  <main class="p-8 max-w-md mx-auto">
-    <h1 class="text-2xl font-semibold mb-6">My Profile</h1>
+  <div id="navbar-container"></div>
 
-    <form id="profile-form" class="space-y-4 bg-white p-6 rounded-lg shadow">
-      <div>
-        <label class="block text-sm font-medium mb-1">Full Name</label>
-        <input type="text" id="fullName" disabled class="w-full border rounded px-3 py-2 bg-gray-100" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">Email</label>
-        <input type="email" id="email" disabled class="w-full border rounded px-3 py-2 bg-gray-100" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">Gender</label>
-        <select id="gender" class="w-full border rounded px-3 py-2">
-          <option value="">-- Select --</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">Age</label>
-        <input type="number" id="age" class="w-full border rounded px-3 py-2" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">Region</label>
-        <input type="text" id="region" class="w-full border rounded px-3 py-2" />
-      </div>
-      <div>
-        <label class="block text-sm font-medium mb-1">City</label>
-        <input type="text" id="city" class="w-full border rounded px-3 py-2" />
-      </div>
+  <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 flex justify-center">
+    <div class="w-full max-w-3xl">
+      
+      <div class="bg-white/80 backdrop-blur-xl border border-white/50 shadow-xl rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-2xl">
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-navy-900 to-navy-800 px-8 py-10 text-center relative overflow-hidden">
+          <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-30"></div>
+          
+          <div class="relative z-10 flex flex-col items-center">
+            <div class="w-24 h-24 bg-gold-400 rounded-full flex items-center justify-center text-4xl shadow-lg border-4 border-white/20 mb-4 transform hover:scale-105 transition-transform duration-300">
+              👤
+            </div>
+            <h1 class="text-3xl font-bold text-white mb-1" id="display-name">My Profile</h1>
+            <p class="text-gold-200 font-medium opacity-90" id="display-email">Manage your account settings</p>
+          </div>
+        </div>
 
-      <p id="status-message" class="text-sm hidden"></p>
+        <!-- Form Section -->
+        <div class="p-8">
+          <form id="profile-form" class="space-y-6">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Full Name (Disabled) -->
+              <div class="group">
+                <label class="block text-sm font-semibold text-navy-900 mb-2">Full Name</label>
+                <div class="relative">
+                  <input type="text" id="fullName" disabled 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-500 cursor-not-allowed" />
+                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                  </div>
+                </div>
+              </div>
 
-      <button type="submit"
-        class="w-full bg-navy-900 text-gold-400 font-bold py-2 rounded hover:bg-navy-950 transition-colors">
-        Save Changes
-      </button>
-    </form>
+              <!-- Email (Disabled) -->
+              <div class="group">
+                <label class="block text-sm font-semibold text-navy-900 mb-2">Email Address</label>
+                <div class="relative">
+                  <input type="email" id="email" disabled 
+                    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-500 cursor-not-allowed" />
+                  <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gender -->
+              <div>
+                <label class="block text-sm font-semibold text-navy-900 mb-2">Gender</label>
+                <select id="gender" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all shadow-sm">
+                  <option value="">-- Select --</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <!-- Age -->
+              <div>
+                <label class="block text-sm font-semibold text-navy-900 mb-2">Age</label>
+                <input type="number" id="age" min="0" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all shadow-sm" />
+              </div>
+
+              <!-- Region -->
+              <div>
+                <label class="block text-sm font-semibold text-navy-900 mb-2">Region</label>
+                <input type="text" id="region" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all shadow-sm" placeholder="Add your region" />
+              </div>
+
+              <!-- City -->
+              <div>
+                <label class="block text-sm font-semibold text-navy-900 mb-2">City</label>
+                <input type="text" id="city" class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all shadow-sm" placeholder="Add your city" />
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-slate-100 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p id="status-message" class="text-sm font-medium px-4 py-2 rounded-lg hidden w-full sm:w-auto text-center"></p>
+              <button type="submit" class="w-full sm:w-auto px-8 py-3 bg-navy-900 text-gold-400 font-bold rounded-xl hover:bg-navy-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 whitespace-nowrap ml-auto">
+                Save Changes
+              </button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+      
+    </div>
   </main>
+
+  <div id="footer-container"></div>
+  <div id="chat-widget-container"></div>
 
   <script src="../src/js/i18n.js"></script>
   <script src="../src/js/components/languageSwitcher.js"></script>
+  <script src="../src/js/components/navbar.js"></script>
+  <script src="../src/js/components/footer.js"></script>
+  <script src="../src/js/components/chatBubble.js"></script>
+  <script src="../src/js/components/chatWidget.js"></script>
   <script src="../src/js/utils/auth.js"></script>
   <script src="../src/js/services/api.js"></script>
   <script src="../src/js/services/userService.js"></script>
+  <script>
+    // Initialize common components
+    document.getElementById('navbar-container').appendChild(renderNavbar());
+    document.getElementById('footer-container').appendChild(renderFooter());
+    initChatWidget();
+    
+    // Auto-update display name from local storage on load to prevent flash
+    try {
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        const user = JSON.parse(userStr);
+        if (user.fullName) document.getElementById('display-name').textContent = user.fullName;
+        if (user.email) document.getElementById('display-email').textContent = user.email;
+      }
+    } catch(e) {}
+  </script>
   <script src="../src/js/pages/profile.js"></script>
 </body>
 

@@ -12,8 +12,7 @@
   <!-- Modern Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
@@ -41,99 +40,121 @@
   </script>
 </head>
 
-<body
-  class="bg-navy-50 font-sans selection:bg-gold-400 selection:text-navy-900 text-navy-900 min-h-screen flex items-center justify-center">
+<body class="bg-navy-50 font-sans selection:bg-gold-400 selection:text-navy-900 text-navy-900 min-h-screen flex items-center justify-center relative py-12 overflow-x-hidden">
 
-  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-lg border border-slate-100">
-    <h1 class="text-2xl font-semibold mb-6 text-center">💊 Tenaye Info</h1>
-
-    <form id="register-form" class="space-y-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium mb-1">Full Name *</label>
-          <input type="text" id="fullName" required
-            class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all" />
-        </div>
-
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium mb-1">Email *</label>
-          <input type="email" id="email" required
-            class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium mb-1">Age *</label>
-          <input type="number" id="age" min="0" required
-            class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium mb-1">Gender *</label>
-          <select id="gender" required
-            class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all bg-white">
-            <option value="">Select...</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium mb-1">Phone Number *</label>
-          <input type="tel" id="phoneNumber" placeholder="+251..." required
-            class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all" />
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium mb-1">Home Address *</label>
-          <input type="text" id="homeAddress" placeholder="City, Region..." required
-            class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all" />
-        </div>
-
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium mb-1">Password *</label>
-          <input type="password" id="password" required minlength="6"
-            class="w-full border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none transition-all" />
-        </div>
-      </div>
-
-      <p id="error-message" class="text-red-600 text-sm hidden"></p>
-
-      <button type="submit"
-        class="w-full bg-navy-900 text-gold-400 font-bold py-2 rounded hover:bg-navy-950 transition-colors">
-        Create Account
-      </button>
-    </form>
-
-    <p class="text-sm text-center mt-4">
-      Already have an account? <a href="login.html" class="text-gold-600 font-semibold hover:text-gold-500">Login</a>
-    </p>
+  <!-- Premium Background Blobs -->
+  <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute top-[-10%] left-[10%] w-[30%] h-[40%] rounded-full bg-navy-800/10 blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[10%] w-[40%] h-[40%] rounded-full bg-gold-400/10 blur-[120px]"></div>
   </div>
 
-  <!-- OTP Verification Modal -->
-  <div id="otp-modal"
-    class="fixed inset-0 bg-navy-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-opacity">
-    <div class="bg-white rounded-2xl p-8 max-w-sm w-full shadow-2xl transform scale-100 transition-transform">
-      <div class="text-center mb-6">
-        <div class="w-16 h-16 bg-gold-100 text-gold-600 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-            </path>
-          </svg>
+  <!-- Back to Home -->
+  <a href="index.html" class="absolute top-6 left-6 flex items-center gap-2 text-navy-900 font-medium hover:text-gold-600 transition-colors bg-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm z-10">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+    Back to Home
+  </a>
+
+  <!-- Register Card -->
+  <div class="w-full max-w-3xl px-4 z-0">
+    <div class="bg-white/90 backdrop-blur-xl p-8 sm:p-12 rounded-[2rem] shadow-2xl border border-white/50 relative overflow-hidden group">
+      
+      <!-- Subtle top gradient border -->
+      <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-navy-900 via-navy-800 to-gold-400"></div>
+      
+      <div class="text-center mb-10 pt-2">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-navy-50 rounded-2xl mb-4 shadow-inner border border-white">
+          <span class="text-3xl drop-shadow-sm">✨</span>
         </div>
-        <h2 class="text-2xl font-bold text-navy-900 mb-2">Verify your email</h2>
-        <p class="text-sm text-navy-600" id="otp-email-display">We've sent a 6-digit code to your email.</p>
+        <h1 class="text-3xl sm:text-4xl font-bold text-navy-950 mb-3">Create an Account</h1>
+        <p class="text-slate-500 font-medium text-sm sm:text-base max-w-md mx-auto">Join Tenaye Info today to get personalized medicine guidance.</p>
       </div>
 
-      <form id="otp-form" class="space-y-4">
-        <div>
-          <input type="text" id="otp-input" maxlength="6" required placeholder="------"
-            class="w-full text-center text-3xl tracking-[0.5em] font-bold border-b-2 border-slate-200 px-3 py-2 focus:border-gold-400 focus:outline-none transition-colors" />
+      <form id="register-form" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="md:col-span-2">
+            <label class="block text-sm font-bold text-navy-900 mb-1.5 ml-1">Full Name *</label>
+            <input type="text" id="fullName" required placeholder="John Doe"
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-400 outline-none transition-all shadow-sm" />
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-sm font-bold text-navy-900 mb-1.5 ml-1">Email Address *</label>
+            <input type="email" id="email" required placeholder="name@example.com"
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-400 outline-none transition-all shadow-sm" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-navy-900 mb-1.5 ml-1">Age *</label>
+            <input type="number" id="age" min="0" required placeholder="e.g. 25"
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-400 outline-none transition-all shadow-sm" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-navy-900 mb-1.5 ml-1">Gender *</label>
+            <select id="gender" required
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-400 outline-none transition-all shadow-sm">
+              <option value="">Select...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-navy-900 mb-1.5 ml-1">Phone Number *</label>
+            <input type="tel" id="phoneNumber" placeholder="+251..." required
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-400 outline-none transition-all shadow-sm" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold text-navy-900 mb-1.5 ml-1">Home Address *</label>
+            <input type="text" id="homeAddress" placeholder="City, Region..." required
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-400 outline-none transition-all shadow-sm" />
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-sm font-bold text-navy-900 mb-1.5 ml-1">Password *</label>
+            <input type="password" id="password" required minlength="6" placeholder="••••••••"
+              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-gold-400 outline-none transition-all shadow-sm" />
+          </div>
         </div>
-        <p id="otp-error-message" class="text-red-600 text-sm hidden text-center font-medium"></p>
+
+        <p id="error-message" class="text-red-500 text-sm font-medium hidden text-center bg-red-50 py-2 rounded-lg"></p>
+
         <button type="submit"
-          class="w-full bg-navy-900 text-gold-400 font-bold py-3 rounded-lg hover:bg-navy-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
+          class="w-full bg-navy-900 text-gold-400 font-bold py-4 rounded-xl hover:bg-navy-800 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 mt-4 text-lg">
+          Create Account
+        </button>
+      </form>
+
+      <p class="text-sm text-center mt-8 text-slate-500 font-medium">
+        Already have an account? <a href="login.html" class="text-gold-600 font-bold hover:text-gold-500 underline decoration-2 underline-offset-4">Log in</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- OTP Verification Modal (Hidden as email verification is bypassed, but kept for JS compatibility) -->
+  <div id="otp-modal"
+    class="fixed inset-0 bg-navy-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 transition-opacity">
+    <div class="bg-white/90 backdrop-blur-xl rounded-3xl p-8 max-w-sm w-full shadow-2xl border border-white/50 relative">
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 bg-navy-50 text-navy-900 rounded-full flex items-center justify-center mx-auto mb-4 border border-navy-100">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-navy-950 mb-2">Verify your email</h2>
+        <p class="text-sm text-slate-500 font-medium" id="otp-email-display">We've sent a 6-digit code to your email.</p>
+      </div>
+
+      <form id="otp-form" class="space-y-5">
+        <div>
+          <input type="text" id="otp-input" maxlength="6" required placeholder="••••••"
+            class="w-full text-center text-3xl tracking-[0.5em] font-bold border-b-2 border-slate-200 px-3 py-3 focus:border-gold-400 outline-none bg-transparent" />
+        </div>
+        <p id="otp-error-message" class="text-red-500 text-sm hidden text-center font-medium"></p>
+        <button type="submit"
+          class="w-full bg-navy-900 text-gold-400 font-bold py-3 rounded-xl hover:bg-navy-800 transition-all shadow-md">
           Verify
         </button>
       </form>
