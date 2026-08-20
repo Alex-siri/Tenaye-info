@@ -14,11 +14,15 @@ const lookupByExtractedText = async (extractedText) => {
     $or: regexes.flatMap((r) => [{ "name.en": r }, { genericName: r }]),
   }).limit(3);
   
-  // 2. If no local results, fallback to OpenFDA API using the best word
+  // 2. If no local results, fallback to OpenFDA API using the best words
   if (matches.length === 0 && words.length > 0) {
-    const fdaDrug = await fetchDrugFromOpenFDA(words[0]);
-    if (fdaDrug) {
-      matches = [fdaDrug];
+    // Try up to the first 3 valid words extracted to find a match in OpenFDA
+    for (let i = 0; i < Math.min(words.length, 3); i++) {
+      const fdaDrug = await fetchDrugFromOpenFDA(words[i]);
+      if (fdaDrug) {
+        matches = [fdaDrug];
+        break; // Stop searching once we find a match
+      }
     }
   }
   

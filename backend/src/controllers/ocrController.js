@@ -44,7 +44,7 @@ const identifyMedicine = async (req, res) => {
       drug: drug,
       lang: req.query.lang || "en",
       ocr: {
-        detected_name: drug_name,
+        detected_name: drug ? drug.name.en || drug.genericName : drug_name,
         raw_text: extractedText
       }
     });
