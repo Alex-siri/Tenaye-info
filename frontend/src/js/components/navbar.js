@@ -70,7 +70,7 @@ function renderNavbar() {
                 </div>
               </div>
             ` : `
-              <a href="/pages/login.html" class="px-5 py-2 text-sm font-bold text-white hover:text-gold-200 transition-colors" data-i18n="nav.login">Login</a>
+              <a href="/pages/login.html" class="px-5 py-2 text-sm font-bold text-white hover:text-gold-200 transition-colors" data-i18n="nav.login">Sign In</a>
               <a href="/pages/register.html" class="px-5 py-2 text-sm font-bold bg-gold-500 text-navy-950 rounded-full hover:bg-gold-400 transition-all shadow-sm hover:shadow" data-i18n="nav.register">Register</a>
             `}
           </div>
@@ -104,7 +104,7 @@ function renderNavbar() {
               </a>
               <button id="mobile-logout-btn" class="w-full text-center px-4 py-2.5 text-red-400 font-bold bg-red-400/10 rounded-xl" data-i18n="nav.logout">Logout</button>
             ` : `
-              <a href="/pages/login.html" class="w-full text-center px-4 py-2.5 text-white font-bold bg-navy-800 rounded-xl" data-i18n="nav.login">Login</a>
+              <a href="/pages/login.html" class="w-full text-center px-4 py-2.5 text-white font-bold bg-navy-800 rounded-xl" data-i18n="nav.login">Sign In</a>
               <a href="/pages/register.html" class="w-full text-center px-4 py-2.5 bg-gold-500 text-navy-950 font-bold rounded-xl" data-i18n="nav.register">Register</a>
             `}
           </div>
