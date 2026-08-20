@@ -33,14 +33,20 @@ function renderMedicineCard(medicine) {
     <div class="space-y-4">
       <!-- Purpose Block -->
       <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-100">
-        <h4 class="font-bold text-blue-900 uppercase text-xs tracking-widest mb-2" data-i18n="search.purpose">Purpose & Uses</h4>
+        <h4 class="font-bold text-blue-900 uppercase text-xs tracking-widest mb-2 flex gap-1">
+          <span class="lang-en">Purpose & Uses</span>
+          <span class="lang-am">ጥቅምና አገልግሎት</span>
+        </h4>
         <p class="text-sm text-navy-800 leading-relaxed lang-en">${purposeEn}</p>
         <p class="text-sm text-navy-800 leading-relaxed lang-am">${purposeAm}</p>
       </div>
 
       <!-- Dosage Block -->
       <div class="bg-emerald-50/50 p-4 rounded-xl border border-emerald-100">
-        <h4 class="font-bold text-emerald-900 uppercase text-xs tracking-widest mb-2" data-i18n="search.dosage">Dosage Info</h4>
+        <h4 class="font-bold text-emerald-900 uppercase text-xs tracking-widest mb-2 flex gap-1">
+          <span class="lang-en">Dosage Info</span>
+          <span class="lang-am">የአወሳሰድ መመሪያ</span>
+        </h4>
         <p class="text-sm text-navy-800 leading-relaxed lang-en">${dosageEn}</p>
         <p class="text-sm text-navy-800 leading-relaxed lang-am">${dosageAm}</p>
       </div>
@@ -48,7 +54,9 @@ function renderMedicineCard(medicine) {
       <!-- Warnings Block (Scrollable for FDA data) -->
       <div class="bg-red-50 p-4 rounded-xl border border-red-100 max-h-64 overflow-y-auto">
         <h4 class="font-bold text-red-800 uppercase text-xs tracking-widest mb-2 flex items-center gap-1">
-          ⚠️ <span data-i18n="search.warnings">Side Effects & Warnings</span>
+          ⚠️ 
+          <span class="lang-en">Side Effects & Warnings</span>
+          <span class="lang-am">የጎንዮሽ ጉዳቶች እና ማስጠንቀቂያዎች</span>
         </h4>
         <p class="text-sm text-red-900 leading-relaxed whitespace-pre-line lang-en">${warningsEn}</p>
         <p class="text-sm text-red-900 leading-relaxed whitespace-pre-line lang-am">${warningsAm}</p>
