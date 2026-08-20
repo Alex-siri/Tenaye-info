@@ -7,27 +7,27 @@ const suggestionBtns = document.querySelectorAll(".suggestion-btn");
 
 // Handle text search
 searchForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const name = searchInput.value.trim();
-  if (!name) return;
-  
-  resultsDiv.innerHTML = '<div class="text-center p-8"><p class="text-navy-800 font-medium">Searching database...</p></div>';
-  
-  try {
-    const data = await searchMedicine(name);
-    resultsDiv.innerHTML = "";
-    
-    if (data.count === 0) {
-      resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800">No medicines found.</p></div>';
-      return;
+    e.preventDefault();
+    const name = searchInput.value.trim();
+    if (!name) return;
+
+    resultsDiv.innerHTML = '<div class="text-center p-8"><p class="text-navy-800 font-medium">Searching database...</p></div>';
+
+    try {
+        const data = await searchMedicine(name);
+        resultsDiv.innerHTML = "";
+
+        if (data.count === 0) {
+            resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800">No medicines found.</p></div>';
+            return;
+        }
+
+        data.medicines.forEach((med) => {
+            resultsDiv.appendChild(renderMedicineCard(med));
+        });
+    } catch (error) {
+        showError(error.message);
     }
-    
-    data.medicines.forEach((med) => {
-      resultsDiv.appendChild(renderMedicineCard(med));
-    });
-  } catch (error) {
-    showError(error.message);
-  }
 });
 
 // Handle suggestion pills
@@ -64,19 +64,19 @@ async function handleFileUpload(e) {
         <img src="${imgUrl}" class="max-h-64 mx-auto rounded-lg shadow-sm mb-4 object-contain border border-slate-100" />
         <p class="text-navy-800 font-medium animate-pulse flex items-center justify-center gap-2">
           <svg class="animate-spin h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-          Analyzing image using AI...
+          Searching drug database…
         </p>
       </div>`;
-    
+
     try {
         const data = await identifyMedicineFromImage(file);
         resultsDiv.innerHTML = "";
-        
+
         if (!data.drug) {
             resultsDiv.innerHTML = `<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800">No match found. Detected text: "${data.ocr?.raw_text || "none"}"</p></div>`;
             return;
         }
-        
+
         const infoText = document.createElement("p");
         infoText.className = "text-gold-600 mb-4 font-semibold text-sm text-center";
         infoText.textContent = `✅ Detected via AI OCR: "${data.ocr.detected_name}"`;
@@ -92,7 +92,7 @@ async function handleFileUpload(e) {
             showError(error.message);
         }
     }
-    
+
     // Reset file inputs so same file can be uploaded again if needed
     cameraInput.value = "";
     galleryInput.value = "";
@@ -103,7 +103,7 @@ async function handleFileUpload(e) {
     dropZone.addEventListener(eventName, preventDefaults, false);
 });
 
-function preventDefaults (e) {
+function preventDefaults(e) {
     e.preventDefault();
     e.stopPropagation();
 }
@@ -146,10 +146,10 @@ if (langPills.length > 0) {
             }
         });
     };
-    
+
     // Initial update on load
     setTimeout(updatePills, 100);
-    
+
     langPills.forEach(pill => {
         pill.addEventListener('click', () => {
             // ONLY change the data-lang attribute to toggle medicine details, 
@@ -158,7 +158,7 @@ if (langPills.length > 0) {
             updatePills();
         });
     });
-    
+
     // Keep pills in sync if the user uses the navbar dropdown instead
     if (typeof i18next !== 'undefined') {
         i18next.on('languageChanged', () => {

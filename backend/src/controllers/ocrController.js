@@ -31,12 +31,13 @@ const identifyMedicine = async (req, res) => {
 
     const drug_name = extractedText.split('\n')[0].trim();
 
-    const matches = await lookupByExtractedText(extractedText);
+    // Use cleanText for lookup to prevent punctuation (like \ or .) from breaking OpenFDA searches
+    const matches = await lookupByExtractedText(cleanText);
     const drug = matches.length > 0 ? matches[0] : null;
 
     if (!drug) {
       return res.status(404).json({
-        detail: `Drug '${drug_name}' was read from the image but not found in the database.`,
+        detail: `Drug '${cleanText.split(' ')[0]}' was read from the image but not found in the database.`,
       });
     }
 
