@@ -8,7 +8,7 @@ function renderChatWidget() {
       
       <!-- Welcome Tooltip Bubble -->
       <div id="chat-tooltip" class="relative flex items-center gap-2 bg-white px-4 py-2.5 rounded-2xl shadow-xl border border-slate-100 animate-bounce cursor-pointer transition-opacity duration-300 mr-2" onclick="document.getElementById('chat-toggle-btn').click()">
-        <span class="text-xl">🤖</span>
+        <svg class="w-6 h-6 text-gold-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
         <div class="flex flex-col">
           <span class="text-xs font-extrabold text-navy-900 leading-none mb-1">Tenaye AI Chatbot</span>
           <span class="text-[11px] font-medium text-slate-500 leading-none">Tap to ask a medical question!</span>
@@ -20,29 +20,23 @@ function renderChatWidget() {
       <div class="relative flex items-center justify-center">
         <div class="absolute w-16 h-16 bg-gold-400 rounded-full animate-ping opacity-20"></div>
         <button id="chat-toggle-btn" class="relative bg-gold-500 hover:bg-gold-400 text-navy-950 rounded-full w-14 h-14 shadow-2xl flex items-center justify-center z-50 transition-transform transform hover:scale-105 border-2 border-white/20">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
+          <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
         </button>
       </div>
     </div>
 
     <!-- Chat Panel -->
-    <div id="chat-panel" class="fixed bottom-24 right-6 w-[calc(100vw-3rem)] sm:w-[400px] h-[600px] max-h-[calc(100vh-8rem)] bg-slate-50 shadow-2xl rounded-2xl transform scale-0 opacity-0 transition-all duration-300 origin-bottom-right z-[60] flex flex-col border border-slate-200 overflow-hidden">
+    <div id="chat-panel" class="fixed bottom-24 right-6 w-[calc(100vw-3rem)] sm:w-[400px] h-[600px] max-h-[calc(100vh-8rem)] bg-slate-50 shadow-2xl rounded-2xl transform scale-0 opacity-0 origin-bottom-right z-[60] flex flex-col border border-slate-200 overflow-hidden">
       
       <!-- Header -->
-      <div class="flex items-center justify-between p-5 bg-gradient-to-r from-navy-950 to-navy-900 text-white shadow-md relative overflow-hidden shrink-0">
+      <div class="flex items-center justify-between p-5 bg-navy-900 text-white shadow-md relative overflow-hidden shrink-0">
         <div class="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
         <div class="flex items-center gap-3 relative z-10">
           <div class="w-10 h-10 bg-gradient-to-br from-gold-400 to-gold-600 rounded-xl flex items-center justify-center shadow-lg border border-gold-300/30">
-            <svg class="w-6 h-6 text-navy-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <svg class="w-6 h-6 text-navy-950" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
           </div>
           <div>
             <h2 class="font-bold text-lg tracking-tight leading-tight">Tenaye AI</h2>
-            <div class="flex items-center gap-1.5 mt-0.5">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <p class="text-[11px] font-medium text-emerald-400 uppercase tracking-widest">Online</p>
-            </div>
           </div>
         </div>
         <button id="chat-close-btn" class="relative z-10 text-slate-400 hover:text-white transition-colors bg-white/10 hover:bg-white/20 rounded-full p-1.5">
@@ -63,11 +57,18 @@ function renderChatWidget() {
           <button class="widget-chip shrink-0 px-3 py-1.5 bg-slate-100 hover:bg-gold-50 text-slate-600 hover:text-gold-700 text-xs font-semibold rounded-full border border-slate-200 hover:border-gold-300 transition-colors">Pregnancy safe meds</button>
         </div>
 
-        <form id="widget-chat-form" class="flex gap-2 bg-slate-50 rounded-xl p-1.5 border border-slate-200 shadow-sm focus-within:ring-2 focus-within:ring-gold-500/30 focus-within:border-gold-400 transition-all">
-          <input type="text" id="widget-message-input" placeholder="Type your medical question..." class="flex-1 border-0 bg-transparent px-3 py-2 text-sm text-slate-800 focus:ring-0 outline-none placeholder-slate-400 font-medium" autocomplete="off" />
-          <button type="submit" class="bg-navy-900 hover:bg-navy-800 text-gold-400 w-10 h-10 rounded-lg shadow-sm transition-transform transform hover:scale-105 active:scale-95 flex items-center justify-center shrink-0">
-             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 -rotate-90 translate-x-[1px] translate-y-[-1px]">
-                 <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+        <form id="widget-chat-form" class="flex gap-2 bg-slate-50 rounded-3xl p-1.5 border border-slate-200 shadow-sm focus-within:ring-2 focus-within:ring-gold-500/30 focus-within:border-gold-400 transition-all items-center pl-4">
+          <input type="text" id="widget-message-input" placeholder="Type your medical question..." class="flex-1 border-0 bg-transparent py-2 text-sm text-slate-800 focus:ring-0 outline-none placeholder-slate-400 font-medium" autocomplete="off" />
+          
+          <button type="button" id="widget-voice-btn" class="text-slate-400 hover:text-navy-900 p-2 rounded-full transition-colors shrink-0" title="Voice Input">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+            </svg>
+          </button>
+
+          <button type="submit" class="bg-navy-900 hover:bg-navy-800 text-white w-9 h-9 rounded-full shadow-sm transition-transform transform hover:scale-105 active:scale-95 flex items-center justify-center shrink-0">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 font-bold">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 10.5L12 3m0 0l7.5 7.5M12 3v18" />
              </svg>
           </button>
         </form>
@@ -85,6 +86,11 @@ function initChatWidget() {
   const chatWindow = document.getElementById('widget-chat-window');
   const form = document.getElementById('widget-chat-form');
   const input = document.getElementById('widget-message-input');
+
+  // Add transition classes after initial load to prevent flash/animation on page navigation
+  setTimeout(() => {
+    if (panel) panel.classList.add('transition-all', 'duration-300');
+  }, 100);
 
   const open = () => {
     panel.classList.remove('scale-0', 'opacity-0');
@@ -147,6 +153,52 @@ function initChatWidget() {
           form.dispatchEvent(new Event('submit', { cancelable: true }));
       });
   });
+
+  // Voice Recognition Logic
+  const voiceBtn = document.getElementById('widget-voice-btn');
+  if (voiceBtn) {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.onstart = function() {
+        voiceBtn.classList.add('text-red-500', 'animate-pulse');
+        voiceBtn.classList.remove('text-slate-400', 'hover:text-navy-900');
+        input.placeholder = "Listening...";
+      };
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        input.value = transcript;
+        setTimeout(() => form.dispatchEvent(new Event('submit', { cancelable: true })), 300);
+      };
+
+      recognition.onerror = function(event) {
+        console.error("Speech recognition error", event.error);
+        input.placeholder = "Type your medical question...";
+      };
+
+      recognition.onend = function() {
+        voiceBtn.classList.remove('text-red-500', 'animate-pulse');
+        voiceBtn.classList.add('text-slate-400', 'hover:text-navy-900');
+        input.placeholder = "Type your medical question...";
+      };
+
+      voiceBtn.addEventListener('click', () => {
+        try {
+          recognition.start();
+        } catch (e) {
+          recognition.stop();
+        }
+      });
+    } else {
+      voiceBtn.addEventListener('click', () => {
+        alert("Voice recognition is not supported in this browser.");
+      });
+    }
+  }
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

@@ -41,12 +41,34 @@ function renderNavbar() {
             <div id="language-switcher-container"></div>
             
             ${isLoggedInStatus ? `
-              <a href="/pages/profile.html" class="flex items-center justify-center w-10 h-10 bg-navy-800 text-gold-400 border border-navy-700 rounded-full hover:bg-navy-700 hover:border-navy-600 hover:text-gold-300 transition-all shadow-sm" title="Profile">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-              </a>
-              <button id="nav-logout-btn" class="text-sm font-semibold text-red-400 hover:text-red-300 transition-colors px-2" data-i18n="nav.logout">Logout</button>
+              <div class="relative" id="profile-dropdown-container">
+                <button id="profile-dropdown-btn" class="flex items-center justify-center w-10 h-10 bg-navy-800 text-gold-400 border border-navy-700 rounded-full hover:bg-navy-700 hover:border-navy-600 hover:text-gold-300 transition-all shadow-sm focus:outline-none" title="Profile">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                  </svg>
+                </button>
+                
+                <!-- Dropdown Menu -->
+                <div id="profile-dropdown-menu" class="absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-xl py-2 hidden border border-slate-100 z-50 transition-all">
+                  <div class="px-4 py-2 border-b border-slate-100 mb-1">
+                    <p class="text-sm font-bold text-navy-950 truncate" id="dropdown-username">My Account</p>
+                  </div>
+                  
+                  <a href="/pages/profile.html" class="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 hover:text-navy-900 transition-colors">
+                    <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    My Profile
+                  </a>
+                  
+
+                  
+                  <div class="border-t border-slate-100 mt-1 pt-1">
+                    <button id="nav-logout-btn" class="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors text-left">
+                      <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              </div>
             ` : `
               <a href="/pages/login.html" class="px-5 py-2 text-sm font-bold text-white hover:text-gold-200 transition-colors" data-i18n="nav.login">Login</a>
               <a href="/pages/register.html" class="px-5 py-2 text-sm font-bold bg-gold-500 text-navy-950 rounded-full hover:bg-gold-400 transition-all shadow-sm hover:shadow" data-i18n="nav.register">Register</a>
@@ -120,6 +142,35 @@ function renderNavbar() {
     toggleBtn.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
+  }
+
+  // Profile dropdown toggle logic
+  const dropdownBtn = header.querySelector('#profile-dropdown-btn');
+  const dropdownMenu = header.querySelector('#profile-dropdown-menu');
+  if (dropdownBtn && dropdownMenu) {
+    dropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdownMenu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', (e) => {
+      if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+        dropdownMenu.classList.add('hidden');
+      }
+    });
+    
+    // Try to populate username from local storage if available
+    try {
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        const user = JSON.parse(userStr);
+        const nameEl = header.querySelector('#dropdown-username');
+        if (nameEl && (user.name || user.fullName)) {
+          nameEl.textContent = user.fullName || user.name;
+        } else if (nameEl && user.email) {
+          nameEl.textContent = user.email.split('@')[0];
+        }
+      }
+    } catch(e) {}
   }
 
   return header;
