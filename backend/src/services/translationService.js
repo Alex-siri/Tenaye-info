@@ -2,13 +2,17 @@ const fetch = require('node-fetch');
 
 const translateToAmharic = async (text, retries = 2) => {
     if (!text || text === 'Information not provided' || text === 'N/A') return '';
+    
+    // Truncate text to avoid 413 Payload Too Large from Google Translate API
+    const safeText = text.length > 800 ? text.substring(0, 800) + "..." : text;
+    
     try {
         const response = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=am&dt=t", {
             method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             },
-            body: new URLSearchParams({ q: text }).toString()
+            body: new URLSearchParams({ q: safeText }).toString()
         });
         
         if (!response.ok) {
