@@ -11,7 +11,12 @@ searchForm.addEventListener("submit", async (e) => {
     const name = searchInput.value.trim();
     if (!name) return;
 
-    resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800 font-medium">Searching database...</p></div>';
+    resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800 font-medium animate-pulse">Searching database...</p></div>';
+    
+    // Automatically scroll to the loading state
+    setTimeout(() => {
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
 
     try {
         const data = await searchMedicine(name);
@@ -56,6 +61,16 @@ async function handleFileUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
 
+    // File size limit: 10MB
+    const maxSizeInBytes = 10 * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+        showError("File size must be less than 10MB. Please choose a smaller image.");
+        // Reset file inputs
+        cameraInput.value = "";
+        galleryInput.value = "";
+        return;
+    }
+
     const imgUrl = URL.createObjectURL(file);
     
     // Replace the drop zone content with the uploaded image
@@ -78,6 +93,11 @@ async function handleFileUpload(e) {
           Searching drug database…
         </p>
       </div>`;
+      
+    // Automatically scroll to the loading state
+    setTimeout(() => {
+        resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
 
     try {
         const data = await identifyMedicineFromImage(file);
