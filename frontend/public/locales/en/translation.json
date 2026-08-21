@@ -70,7 +70,12 @@
     "browseFiles": "Browse files",
     "orSearch": "or search by name",
     "button": "Search",
-    "try": "Try:"
+    "try": "Try:",
+    "resultsLanguage": "Results Language:",
+    "searching": "Searching database...",
+    "noMatchDetected": "No match found. Detected text:",
+    "detectedOcr": "Detected via AI OCR:",
+    "notFoundDatabase": "Drug '{{drug}}' was read from the image but not found in the database."
   },
   "profile": {
     "title": "My Profile",

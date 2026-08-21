@@ -5,13 +5,19 @@ const dropZone = document.getElementById("drop-zone");
 const resultsDiv = document.getElementById("results");
 const suggestionBtns = document.querySelectorAll(".suggestion-btn");
 
+// Store dynamic error data to translate on language change
+let currentDynamicError = null;
+
 // Handle text search
 searchForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = searchInput.value.trim();
     if (!name) return;
+    
+    currentDynamicError = null; // Clear any previous error
 
-    resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800 font-medium animate-pulse">Searching database...</p></div>';
+    resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800 font-medium animate-pulse" data-i18n="search.searching">Searching database...</p></div>';
+    if (typeof applyTranslations === 'function') applyTranslations();
     
     // Automatically scroll to the loading state
     setTimeout(() => {
@@ -23,7 +29,8 @@ searchForm.addEventListener("submit", async (e) => {
         resultsDiv.innerHTML = "";
 
         if (data.count === 0) {
-            resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800">No medicines found.</p></div>';
+            resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800" data-i18n="search.noResults">No medicines found.</p></div>';
+            if (typeof applyTranslations === 'function') applyTranslations();
             return;
         }
 
@@ -68,6 +75,8 @@ galleryInput.addEventListener("change", handleFileUpload);
 async function handleFileUpload(e) {
     const file = e.target.files[0];
     if (!file) return;
+    
+    currentDynamicError = null; // Clear any previous error
 
     // File size limit: 10MB
     const maxSizeInBytes = 10 * 1024 * 1024;
@@ -98,9 +107,10 @@ async function handleFileUpload(e) {
       <div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm mb-6">
         <p class="text-navy-800 font-medium animate-pulse flex items-center justify-center gap-2">
           <svg class="animate-spin h-5 w-5 text-gold-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-          Searching drug database…
+          <span data-i18n="search.searching">Searching drug database…</span>
         </p>
       </div>`;
+    if (typeof applyTranslations === 'function') applyTranslations();
       
     // Automatically scroll to the loading state
     setTimeout(() => {
@@ -112,16 +122,18 @@ async function handleFileUpload(e) {
         resultsDiv.innerHTML = "";
 
         if (!data.drug) {
-            resultsDiv.innerHTML = `<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800">No match found. Detected text: "${data.ocr?.raw_text || "none"}"</p></div>`;
+            resultsDiv.innerHTML = `<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800"><span data-i18n="search.noMatchDetected">No match found. Detected text:</span> "${data.ocr?.raw_text || "none"}"</p></div>`;
+            if (typeof applyTranslations === 'function') applyTranslations();
             return;
         }
 
         const infoText = document.createElement("p");
         infoText.className = "text-gold-600 mb-4 font-semibold text-sm text-center bg-gold-50 p-3 rounded-lg border border-gold-200";
-        infoText.textContent = `✅ Detected via AI OCR: "${data.ocr.detected_name}"`;
+        infoText.innerHTML = `✅ <span data-i18n="search.detectedOcr">Detected via AI OCR:</span> "${data.ocr.detected_name}"`;
         resultsDiv.appendChild(infoText);
 
         resultsDiv.appendChild(renderMedicineCard(data.drug));
+        if (typeof applyTranslations === 'function') applyTranslations();
         
         // Scroll to results
         setTimeout(() => {
@@ -132,7 +144,17 @@ async function handleFileUpload(e) {
         if (error.message.includes('Failed to fetch')) {
             showError("Network Error: Could not connect to the server. The image might be too large or the AI service is busy.");
         } else if (error.message.includes('not found in the database')) {
-            resultsDiv.innerHTML = `<div class="text-center p-8 bg-gold-50 rounded-xl border border-gold-200 shadow-sm"><p class="text-gold-700 font-medium">⚠️ ${error.message}</p></div>`;
+            const match = error.message.match(/Drug '(.*)' was read/);
+            const drugName = match ? match[1] : '';
+            
+            currentDynamicError = { type: 'notFoundDatabase', drug: drugName, originalMsg: error.message };
+            
+            resultsDiv.innerHTML = `<div class="text-center p-8 bg-gold-50 rounded-xl border border-gold-200 shadow-sm"><p class="text-gold-700 font-medium" id="error-not-found">⚠️ ${error.message}</p></div>`;
+            
+            if (typeof i18next !== 'undefined') {
+                const el = document.getElementById('error-not-found');
+                el.innerHTML = `⚠️ ${i18next.t('search.notFoundDatabase', { drug: drugName }) || error.message}`;
+            }
         } else {
             showError(error.message);
         }
@@ -190,6 +212,14 @@ if (langPills.length > 0) {
                 pill.className = "lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors border shadow-sm bg-white text-gray-700 hover:bg-gray-50 border-gray-200";
             }
         });
+        
+        // Re-translate dynamic error if present
+        if (currentDynamicError && currentDynamicError.type === 'notFoundDatabase' && typeof i18next !== 'undefined') {
+            const el = document.getElementById('error-not-found');
+            if (el) {
+                el.innerHTML = `⚠️ ${i18next.t('search.notFoundDatabase', { drug: currentDynamicError.drug }) || currentDynamicError.originalMsg}`;
+            }
+        }
     };
 
     // Initial update on load

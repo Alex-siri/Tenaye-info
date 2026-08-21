@@ -70,7 +70,12 @@
     "browseFiles": "ፋይሎችን ፈልግ",
     "orSearch": "ወይም በስም ይፈልጉ",
     "button": "ፈልግ",
-    "try": "ይሞክሩ:"
+    "try": "ይሞክሩ:",
+    "resultsLanguage": "የውጤት ቋንቋ:",
+    "searching": "በመፈለግ ላይ...",
+    "noMatchDetected": "ምንም ተዛማጅ አልተገኘም። የተነበበ ጽሑፍ:",
+    "detectedOcr": "በ AI OCR የተገኘ:",
+    "notFoundDatabase": "የመድኃኒቱ ስም '{{drug}}' ከምስሉ ላይ ተነቧል ነገር ግን በመረጃ ቋቱ ውስጥ አልተገኘም።"
   },
   "profile": {
     "title": "የእኔ መገለጫ",
