@@ -27,7 +27,7 @@ function renderMedicineCard(medicine) {
       body[data-lang="am"] .lang-en { display: none !important; }
     </style>
     <h3 class="font-bold text-2xl text-navy-900 mb-4 border-b border-navy-50 pb-3 flex items-center gap-2">
-      💊 <span class="lang-en">${nameEn}</span><span class="lang-am">${nameAm}</span>
+      💊 <span class="lang-en">${nameEn}</span><span class="lang-am am-translate" data-en="${nameEn}">${nameAm}</span>
     </h3>
     
     <div class="space-y-4">
@@ -38,7 +38,7 @@ function renderMedicineCard(medicine) {
           <span class="lang-am">ጥቅምና አገልግሎት</span>
         </h4>
         <p class="text-sm text-navy-800 leading-relaxed lang-en">${purposeEn}</p>
-        <p class="text-sm text-navy-800 leading-relaxed lang-am">${purposeAm}</p>
+        <p class="text-sm text-navy-800 leading-relaxed lang-am am-translate" data-en="${purposeEn}">${purposeAm}</p>
       </div>
 
       <!-- Dosage Block -->
@@ -48,7 +48,7 @@ function renderMedicineCard(medicine) {
           <span class="lang-am">የአወሳሰድ መመሪያ</span>
         </h4>
         <p class="text-sm text-navy-800 leading-relaxed lang-en">${dosageEn}</p>
-        <p class="text-sm text-navy-800 leading-relaxed lang-am">${dosageAm}</p>
+        <p class="text-sm text-navy-800 leading-relaxed lang-am am-translate" data-en="${dosageEn}">${dosageAm}</p>
       </div>
 
       <!-- Warnings Block (Scrollable for FDA data) -->
@@ -59,7 +59,7 @@ function renderMedicineCard(medicine) {
           <span class="lang-am">የጎንዮሽ ጉዳቶች እና ማስጠንቀቂያዎች</span>
         </h4>
         <p class="text-sm text-red-900 leading-relaxed whitespace-pre-line lang-en">${warningsEn}</p>
-        <p class="text-sm text-red-900 leading-relaxed whitespace-pre-line lang-am">${warningsAm}</p>
+        <p class="text-sm text-red-900 leading-relaxed whitespace-pre-line lang-am am-translate" data-en="${warningsEn}">${warningsAm}</p>
       </div>
     </div>
   `;
@@ -71,6 +71,37 @@ function renderMedicineCard(medicine) {
           el.textContent = i18next.t(el.getAttribute('data-i18n'));
       });
   }
+
+  // Client-side translation fallback to bypass backend IP blocking on Render
+  setTimeout(async () => {
+      const hasAmharic = (str) => /[\u1200-\u137F]/.test(str || '');
+      const amElements = card.querySelectorAll('.am-translate');
+      
+      for (const el of amElements) {
+          const amText = el.textContent;
+          const enText = el.getAttribute('data-en');
+          
+          if (enText && enText !== "Information not provided" && enText !== "N/A" && !hasAmharic(amText)) {
+              try {
+                  const safeText = enText.length > 800 ? enText.substring(0, 800) + "..." : enText;
+                  const res = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=am&dt=t", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                      body: new URLSearchParams({ q: safeText }).toString()
+                  });
+                  
+                  if (res.ok) {
+                      const data = await res.json();
+                      if (data && data[0]) {
+                          el.textContent = data[0].map(i => i[0]).join('');
+                      }
+                  }
+              } catch (err) {
+                  console.error("Client translation failed", err);
+              }
+          }
+      }
+  }, 100);
 
   return card;
 }
