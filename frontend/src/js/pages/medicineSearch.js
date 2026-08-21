@@ -11,20 +11,18 @@ searchForm.addEventListener("submit", async (e) => {
     const name = searchInput.value.trim();
     if (!name) return;
 
-    resultsDiv.innerHTML = '<div class="text-center p-8"><p class="text-navy-800 font-medium">Searching database...</p></div>';
+    resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800 font-medium">Searching database...</p></div>';
 
     try {
         const data = await searchMedicine(name);
-        resultsDiv.innerHTML = "";
-
-        if (data.count === 0) {
-            resultsDiv.innerHTML = '<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800">No medicines found.</p></div>';
-            return;
-        }
-
-        data.medicines.forEach((med) => {
-            resultsDiv.appendChild(renderMedicineCard(med));
-        });
+        
+        // Store in session storage and redirect
+        sessionStorage.setItem('medicineSearchResult', JSON.stringify({
+            type: 'text',
+            data: data
+        }));
+        window.location.href = 'medicine-details.html';
+        
     } catch (error) {
         showError(error.message);
     }
@@ -83,19 +81,14 @@ async function handleFileUpload(e) {
 
     try {
         const data = await identifyMedicineFromImage(file);
-        resultsDiv.innerHTML = "";
-
-        if (!data.drug) {
-            resultsDiv.innerHTML = `<div class="text-center p-8 bg-white rounded-xl border border-navy-100 shadow-sm"><p class="text-navy-800">No match found. Detected text: "${data.ocr?.raw_text || "none"}"</p></div>`;
-            return;
-        }
-
-        const infoText = document.createElement("p");
-        infoText.className = "text-gold-600 mb-4 font-semibold text-sm text-center";
-        infoText.textContent = `✅ Detected via AI OCR: "${data.ocr.detected_name}"`;
-        resultsDiv.appendChild(infoText);
-
-        resultsDiv.appendChild(renderMedicineCard(data.drug));
+        
+        // Store in session storage and redirect
+        sessionStorage.setItem('medicineSearchResult', JSON.stringify({
+            type: 'image',
+            data: data
+        }));
+        window.location.href = 'medicine-details.html';
+        
     } catch (error) {
         if (error.message.includes('Failed to fetch')) {
             showError("Network Error: Could not connect to the server. The image might be too large or the AI service is busy.");
