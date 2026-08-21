@@ -147,14 +147,11 @@ async function handleFileUpload(e) {
             const match = error.message.match(/Drug '(.*)' was read/);
             const drugName = match ? match[1] : '';
             
-            currentDynamicError = { type: 'notFoundDatabase', drug: drugName, originalMsg: error.message };
+            const escapedDrugName = drugName.replace(/"/g, '&quot;');
             
-            resultsDiv.innerHTML = `<div class="text-center p-8 bg-gold-50 rounded-xl border border-gold-200 shadow-sm"><p class="text-gold-700 font-medium" id="error-not-found">⚠️ ${error.message}</p></div>`;
+            resultsDiv.innerHTML = `<div class="text-center p-8 bg-gold-50 rounded-xl border border-gold-200 shadow-sm"><p class="text-gold-700 font-medium" data-i18n="search.notFoundDatabase" data-i18n-options='{"drug":"${escapedDrugName}"}'>⚠️ ${error.message}</p></div>`;
             
-            if (typeof i18next !== 'undefined') {
-                const el = document.getElementById('error-not-found');
-                el.innerHTML = `⚠️ ${i18next.t('search.notFoundDatabase', { drug: drugName }) || error.message}`;
-            }
+            if (typeof applyTranslations === 'function') applyTranslations();
         } else {
             showError(error.message);
         }
@@ -212,14 +209,6 @@ if (langPills.length > 0) {
                 pill.className = "lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors border shadow-sm bg-white text-gray-700 hover:bg-gray-50 border-gray-200";
             }
         });
-        
-        // Re-translate dynamic error if present
-        if (currentDynamicError && currentDynamicError.type === 'notFoundDatabase' && typeof i18next !== 'undefined') {
-            const el = document.getElementById('error-not-found');
-            if (el) {
-                el.innerHTML = `⚠️ ${i18next.t('search.notFoundDatabase', { drug: currentDynamicError.drug }) || currentDynamicError.originalMsg}`;
-            }
-        }
     };
 
     // Initial update on load

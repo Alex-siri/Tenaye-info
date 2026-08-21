@@ -21,7 +21,17 @@ function initI18n(callback) {
 function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
-    el.textContent = i18next.t(key);
+    const optionsAttr = el.getAttribute('data-i18n-options');
+    let options = {};
+    if (optionsAttr) {
+        try { options = JSON.parse(optionsAttr); } catch (e) {}
+    }
+    
+    // Only update if it's an actual translation, not just the key name (if missing)
+    const translated = i18next.t(key, options);
+    if (translated && translated !== key) {
+        el.innerHTML = translated;
+    }
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
     const key = el.getAttribute('data-i18n-placeholder');
