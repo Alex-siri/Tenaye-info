@@ -195,41 +195,4 @@ function showError(message) {
     resultsDiv.innerHTML = `<div class="text-center p-8 bg-red-50 rounded-xl border border-red-100 shadow-sm"><p class="text-red-600 font-medium">${message}</p></div>`;
 }
 
-// Handle Hero Language Pill Buttons
-const langPills = document.querySelectorAll('.lang-pill');
-if (langPills.length > 0) {
-    const updatePills = () => {
-        const currentDataLang = document.body.getAttribute('data-lang') || localStorage.getItem('language') || 'en';
-        langPills.forEach(pill => {
-            if (pill.dataset.lang === currentDataLang) {
-                // Active state (Gold)
-                pill.className = "lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors shadow-sm bg-gold-500 text-navy-950 border-transparent";
-            } else {
-                // Inactive state (White with border)
-                pill.className = "lang-pill px-6 py-2 rounded-full text-sm font-semibold transition-colors border shadow-sm bg-white text-gray-700 hover:bg-gray-50 border-gray-200";
-            }
-        });
-    };
-
-    // Initial update on load
-    setTimeout(updatePills, 100);
-
-    langPills.forEach(pill => {
-        pill.addEventListener('click', () => {
-            if (typeof changeLanguage === 'function') {
-                changeLanguage(pill.dataset.lang);
-            } else {
-                document.body.setAttribute('data-lang', pill.dataset.lang);
-            }
-            updatePills();
-        });
-    });
-
-    // Keep pills in sync if the user uses the navbar dropdown instead
-    if (typeof i18next !== 'undefined') {
-        i18next.on('languageChanged', () => {
-            // i18n.js automatically updates the data-lang on the body, so we just need to update the pills visually
-            updatePills();
-        });
-    }
-}
+// Logic removed
