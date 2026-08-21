@@ -216,9 +216,11 @@ if (langPills.length > 0) {
 
     langPills.forEach(pill => {
         pill.addEventListener('click', () => {
-            // ONLY change the data-lang attribute to toggle medicine details, 
-            // DO NOT call changeLanguage() which would change the entire UI.
-            document.body.setAttribute('data-lang', pill.dataset.lang);
+            if (typeof changeLanguage === 'function') {
+                changeLanguage(pill.dataset.lang);
+            } else {
+                document.body.setAttribute('data-lang', pill.dataset.lang);
+            }
             updatePills();
         });
     });
