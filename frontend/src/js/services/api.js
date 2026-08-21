@@ -1,4 +1,5 @@
-const API_BASE_URL = '/api';
+// Use deployed backend URL for API requests
+const API_BASE_URL = 'https://tenaye-info.onrender.com/api';
 
 async function apiRequest(endpoint, options = {}) {
     const token = getToken();

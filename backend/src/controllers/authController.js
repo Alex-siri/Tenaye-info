@@ -28,35 +28,6 @@ const register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const otp = generateOTP();
-    
-    // Send Real Email!
-    const emailHtml = `
-      <div style="font-family: Arial, sans-serif; text-align: center; max-width: 500px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden;">
-        <div style="background-color: #172554; padding: 20px;">
-          <h2 style="color: #D4AF37; margin: 0;">Welcome to Tenaye Info!</h2>
-        </div>
-        <div style="padding: 30px;">
-          <p style="font-size: 16px; color: #333;">Hello ${fullName},</p>
-          <p style="font-size: 16px; color: #333;">Please use the following 6-digit code to verify your email address:</p>
-          <h1 style="font-size: 40px; color: #172554; letter-spacing: 5px; margin: 20px 0;">${otp}</h1>
-          <p style="font-size: 14px; color: #666;">This code will expire in 10 minutes.</p>
-        </div>
-      </div>
-    `;
-
-    await sendEmail({
-      email: email,
-      subject: 'Tenaye Info - Email Verification Code',
-      message: `Your verification code is: ${otp}`,
-      html: emailHtml
-    });
-
-    console.log(`\n=========================================`);
-    console.log(`📧 Sending OTP to ${email}`);
-    console.log(`🔑 Verification Code: ${otp} (For testing)`);
-    console.log(`=========================================\n`);
-
     const newUser = new User({
       fullName,
       email,
@@ -65,8 +36,6 @@ const register = async (req, res) => {
       age,
       phoneNumber,
       homeAddress,
-      otp,
-      otpExpires: new Date(Date.now() + 10 * 60000), // Expires in 10 mins
       isVerified: true
     });
     

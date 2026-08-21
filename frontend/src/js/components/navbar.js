@@ -25,7 +25,7 @@ function renderNavbar() {
         <div class="flex items-center justify-between h-16">
           <!-- Logo -->
           <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer transition-transform hover:scale-105">
-            <span class="text-2xl drop-shadow-sm">💊</span>
+            <span class="text-2xl">💊</span>
             <span class="font-bold text-xl tracking-tight text-white">Tenaye <span class="text-gold-400 font-extrabold">Info</span></span>
           </div>
 
